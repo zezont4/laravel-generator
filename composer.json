@@ -1,5 +1,5 @@
 {
-    "name": "zezont4/LaravelGenerator",
+    "name": "zezont4/laravel-generator",
     "type": "library",
     "description": "Generate the main classes that laravel use to work with database . Like model,controller,request,blade forms",
     "keywords": [
