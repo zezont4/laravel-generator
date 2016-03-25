@@ -1,2 +1,2 @@
 <?php
-Route::get('laravel_helper', 'LaravelGeneratorController@showTables');
+Route::get('laravel_generator', 'LaravelGeneratorController@showTables');
