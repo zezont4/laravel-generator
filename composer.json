@@ -27,7 +27,7 @@
     },
     "autoload": {
         "psr-4": {
-            ":vendor\\:package_name\\": "src"
+            "Zezont4:LaravelGenerator\\": "src"
         }
     },
     "autoload-dev": {
