@@ -27,7 +27,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Zezont4:LaravelGenerator\\": "src"
+            "Zezont4\\LaravelGenerator\\": "src"
         }
     },
     "autoload-dev": {
