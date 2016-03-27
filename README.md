@@ -11,10 +11,11 @@ Generate the main classes that laravel use to work with database . Like model,co
 
 ## Install
 
-Via Composer
 
 ``` bash
 $ composer require zezont4/LaravelGenerator
+
+$ php artisan vendor:publish --tag=public --force
 ```
 
 ## Credits

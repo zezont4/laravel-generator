@@ -1,0 +1,278 @@
+html {
+    direction: rtl;
+}
+
+body {
+    direction: rtl;
+}
+
+.card {
+    overflow: hidden;
+}
+
+.row .radio_rapper {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #9e9e9e;
+    padding-bottom: 10px;
+}
+
+.row .radio_rapper .title-font {
+    color: #6B6B6B;
+    padding-bottom: 5px;
+}
+
+[type="radio"] + label:before, [type="radio"] + label:after {
+    right: 0;
+}
+
+[type="radio"]:not(:checked) + label, [type="radio"]:checked + label {
+    padding-left: 10px;
+    padding-right: 25px;
+}
+
+[type="checkbox"]:checked + label:before {
+    right: 11px;
+}
+
+[type="checkbox"] + label {
+    line-height: 30px;
+}
+
+[type="checkbox"] + label:before {
+    right: 0;
+    margin-top: 3px;
+    border: 2px solid #888;
+}
+
+[type=checkbox] + label {
+    padding-right: 25px;
+    padding-left: 0;
+}
+
+form p {
+    text-align: right;
+}
+
+.modal .modal-footer .btn, .modal .modal-footer .btn-large, .modal .modal-footer .btn-flat {
+    float: left;
+    margin: 6px 0;
+}
+
+.toast {
+    word-break: normal;
+}
+
+.row .col {
+    float: right;
+}
+
+.input-field label {
+    right: 0.75rem;
+}
+
+.dropdown-content li {
+    text-align: right;
+}
+
+.select-wrapper span.caret {
+    left: 0;
+    text-align: left;
+}
+
+td, th {
+    text-align: right;
+}
+
+.row .col.offset-s1 {
+    margin-right: 8.33333%;
+    margin-left: 0;
+}
+
+.row .col.offset-s2 {
+    margin-right: 16.66667%;
+    margin-left: 0;
+}
+
+.row .col.offset-s3 {
+    margin-right: 25%;
+    margin-left: 0;
+}
+
+.row .col.offset-s4 {
+    margin-right: 33.33333%;
+    margin-left: 0;
+}
+
+.row .col.offset-s5 {
+    margin-right: 41.66667%;
+    margin-left: 0;
+}
+
+.row .col.offset-s6 {
+    margin-right: 50%;
+    margin-left: 0;
+}
+
+.row .col.offset-s7 {
+    margin-right: 58.33333%;
+    margin-left: 0;
+}
+
+.row .col.offset-s8 {
+    margin-right: 66.66667%;
+    margin-left: 0;
+}
+
+.row .col.offset-s9 {
+    margin-right: 75%;
+    margin-left: 0;
+}
+
+.row .col.offset-s10 {
+    margin-right: 83.33333%;
+    margin-left: 0;
+}
+
+.row .col.offset-s11 {
+    margin-right: 91.66667%;
+    margin-left: 0;
+}
+
+.row .col.offset-s12 {
+    margin-right: 100%;
+    margin-left: 0;
+}
+
+blockquote {
+    margin: 20px 0;
+    padding-left: 0;
+    padding-right: 1rem;
+    border-left: none;
+    border-right: 5px solid #ee6e73;
+}
+
+@media only screen and (min-width: 601px) {
+
+    .row .col.offset-m1 {
+        margin-right: 8.33333%;
+        margin-left: 0;
+    }
+
+    .row .col.offset-m2 {
+        margin-right: 16.66667%;
+        margin-left: 0;
+    }
+
+    .row .col.offset-m3 {
+        margin-right: 25%;
+        margin-left: 0;
+    }
+
+    .row .col.offset-m4 {
+        margin-right: 33.33333%;
+        margin-left: 0;
+    }
+
+    .row .col.offset-m5 {
+        margin-right: 41.66667%;
+        margin-left: 0;
+    }
+
+    .row .col.offset-m6 {
+        margin-right: 50%;
+        margin-left: 0;
+    }
+
+    .row .col.offset-m7 {
+        margin-right: 58.33333%;
+        margin-left: 0;
+    }
+
+    .row .col.offset-m8 {
+        margin-right: 66.66667%;
+        margin-left: 0;
+    }
+
+    .row .col.offset-m9 {
+        margin-right: 75%;
+        margin-left: 0;
+    }
+
+    .row .col.offset-m10 {
+        margin-right: 83.33333%;
+        margin-left: 0;
+    }
+
+    .row .col.offset-m11 {
+        margin-right: 91.66667%;
+        margin-left: 0;
+    }
+
+    .row .col.offset-m12 {
+        margin-right: 100%;
+        margin-left: 0;
+    }
+}
+
+@media only screen and (min-width: 993px) {
+
+    .row .col.offset-l1 {
+        margin-right: 8.33333%;
+        margin-left: 0;
+    }
+
+    .row .col.offset-l2 {
+        margin-right: 16.66667%;
+        margin-left: 0;
+    }
+
+    .row .col.offset-l3 {
+        margin-right: 25%;
+        margin-left: 0;
+    }
+
+    .row .col.offset-l4 {
+        margin-right: 33.33333%;
+        margin-left: 0;
+    }
+
+    .row .col.offset-l5 {
+        margin-right: 41.66667%;
+        margin-left: 0;
+    }
+
+    .row .col.offset-l6 {
+        margin-right: 50%;
+        margin-left: 0;
+    }
+
+    .row .col.offset-l7 {
+        margin-right: 58.33333%;
+        margin-left: 0;
+    }
+
+    .row .col.offset-l8 {
+        margin-right: 66.66667%;
+        margin-left: 0;
+    }
+
+    .row .col.offset-l9 {
+        margin-right: 75%;
+        margin-left: 0;
+    }
+
+    .row .col.offset-l10 {
+        margin-right: 83.33333%;
+        margin-left: 0;
+    }
+
+    .row .col.offset-l11 {
+        margin-right: 91.66667%;
+        margin-left: 0;
+    }
+
+    .row .col.offset-l12 {
+        margin-right: 100%;
+        margin-left: 0;
+    }
+}
