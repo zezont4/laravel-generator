@@ -12,7 +12,7 @@
 ### Requirements
     Laravel >=5.2
     PHP >= 5.5.9
-    Auto Loaded : [laravelcollective/html package for form & html](https://laravelcollective.com/docs/5.2/html)
+    Auto Loaded : [link-laravelcollective/html package for form & html](https://laravelcollective.com/docs/5.2/html)
 
 Generate the main classes that laravel use to work with database . Like model,controller,request,blade forms.
 
