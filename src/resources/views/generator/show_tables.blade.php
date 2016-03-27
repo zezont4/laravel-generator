@@ -1,15 +1,21 @@
 @extends('package_views::layouts.master')
-@section('title','الحقول')
+@section('title','الجداول Tables')
 @section('content')
     <div style="direction: ltr">
-        <h3 class = "header">الجداول</h3>
-        @foreach($tables as $table)
-            <h5><a href = "/laravel_generator/{{$table->$field_name_for_table_name}}/show_fields">{{$table->$field_name_for_table_name}}</a></h5>
-        @endforeach
+        <h4 class="header">الجداول</h4>
+        <div class="collection">
+            @foreach($tables as $table)
+                <a class="collection-item"
+                   href="/laravel_generator/{{$table->$field_name_for_table_name}}/show_fields">{{$table->$field_name_for_table_name}}</a>
+            @endforeach
+        </div>
 
-        <h3 class = "header">Views</h3>
-        @foreach($views as $view)
-            <h5>{{$view->$field_name_for_table_name}}</h5>
-        @endforeach
+        <h4 class="header">Views</h4>
+        <div class="collection">
+            @foreach($views as $view)
+                <a class="collection-item"
+                   href="/laravel_generator/{{$view->$field_name_for_table_name}}/show_fields">{{$view->$field_name_for_table_name}}</a>
+            @endforeach
+        </div>
     </div>
 @stop

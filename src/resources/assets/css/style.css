@@ -410,11 +410,6 @@ input[type=text] + label:after, input[type=password] + label:after, input[type=e
     font-size: 14px;
 }
 
-select.browser-default {
-    background-color: rgba(238, 238, 238, 0);
-    border: 1px solid #999;
-}
-
 input[type=text][readonly="readonly"][zezo_date="true"] {
     color: #555;
     font-size: 24px;

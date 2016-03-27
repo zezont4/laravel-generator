@@ -1,4 +1,4 @@
-# Laravel Helper
+# Laravel Generator
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
@@ -7,16 +7,43 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
+# Laravel 5 Generator
+
+### Requirements
+    Laravel >=5.2
+    PHP >= 5.5.9
+    Auto Loaded : [laravelcollective/html package for form & html](https://laravelcollective.com/docs/5.2/html)
+
 Generate the main classes that laravel use to work with database . Like model,controller,request,blade forms.
 
-## Install
+## Installation
 
-
+1. Run
 ``` bash
-$ composer require zezont4/LaravelGenerator
-
-$ php artisan vendor:publish --tag=public --force
+    composer require zezont4/LaravelGenerator
 ```
+
+2. Add service provider & Aliases to **/config/app.php** file.
+``` php
+    'providers' => [
+        \\ Other Providers,
+        Zezont4\LaravelGenerator\LaravelGeneratorServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
+    ],
+
+    'aliases' => [
+        \\ Other Aliases,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
+    ],
+```
+
+3. Publish assets files.
+``` bash
+    php artisan vendor:publish --tag=public --force
+```
+
+3. Visit (http://your_host_name/**laravel_generator**)
 
 ## Credits
 

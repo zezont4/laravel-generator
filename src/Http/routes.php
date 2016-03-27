@@ -1,5 +1,5 @@
 <?php
-Route::group(['prefix' => 'laravel_generator','middleware' => ['web']], function () {
+Route::group(['prefix' => 'laravel_generator', 'middleware' => ['web']], function () {
     Route::get('/', 'LaravelGeneratorController@showTables');
     Route::get('show_tables', 'LaravelGeneratorController@showTables');
     Route::get('{table}/show_fields', 'LaravelGeneratorController@showFields');
