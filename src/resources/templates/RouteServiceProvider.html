@@ -1,0 +1,4 @@
+$router->model('<code>lower_case_model_name</code>_id', 'App\<code>model_name</code>');
+$router->bind('<code>lower_case_model_name</code>_id_wt', function ($value) {
+return \App\<code>model_name</code>::withTrashed()->findOrFail($value);
+});

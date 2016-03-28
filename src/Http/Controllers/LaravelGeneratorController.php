@@ -4,6 +4,7 @@ namespace Zezont4\LaravelGenerator\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
+use Zezont4\LaravelGenerator\LaravelGeneratorServiceProvider as zezoService;
 
 
 class LaravelGeneratorController extends Controller
@@ -24,7 +25,7 @@ class LaravelGeneratorController extends Controller
 
     public function showFields($table)
     {
-        session(['table_name' => $table]);
+        session()->put('table_name', $table);
 
         $fields = DB::select("SHOW FULL COLUMNS FROM {$table}");
 
@@ -35,7 +36,7 @@ class LaravelGeneratorController extends Controller
     public function postToSession(Request $request)
     {
 //        dd($request->all());
-        session(['fields' => $request->all()]);
+        session()->put('fields', $request->all());
 
         return redirect()->to('/laravel_generator/make_pages');
     }
@@ -44,9 +45,13 @@ class LaravelGeneratorController extends Controller
     public function makePages(Request $request)
     {
         $table_name = $request->has('table_name') ? $request->table_name : session('table_name');
+        session()->put('table_name', $table_name);
         $primary_key = '';
         $model_name = $request->has('model_name') ? $request->model_name : ucfirst($table_name);
+        session()->put('model_name', $model_name);
         $table_label = $request->has('table_label') ? $request->table_label : ucfirst($table_name);
+
+//        dd(app_path());
 
         $fields_array = [];
         if (session()->has('fields')) {
@@ -67,7 +72,10 @@ class LaravelGeneratorController extends Controller
                 ]);
             }
         }
+        session()->put('fields_array', $fields_array);
 
+
+//        dd($fields_array);
         return view('package_views::generator.make_pages', compact('fields_array', 'table_name', 'primary_key', 'model_name', 'table_label'));
     }
 

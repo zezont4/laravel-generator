@@ -1,0 +1,80 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Http\Requests\<code>model_name</code>Request;
+use App\Models\<code>model_name</code>;
+
+class <code>model_name</code>Controller extends Controller
+{
+
+    public function __construct()
+    {
+        //$this->middleware('auth');
+        //$this->middleware('acl');
+    }
+
+    public function search()
+    {
+        return View('<code>lower_case_model_name</code>.search');
+    }
+
+    public function index(<code>model_name</code> $<code>lower_case_model_name</code>)
+
+    {
+        // DB::row is used to fix order by full_name
+        //$<code>lower_case_model_name</code>s = $<code>lower_case_model_name</code>->search()->sort()->select('*', \DB::raw('CONCAT_WS(" ", name1, name2, name3, name4) AS full_name'))->paginate();
+
+        $<code>lower_case_model_name</code>s = $<code>lower_case_model_name</code>->search()->sort()->paginate();
+
+        $trashed<code>model_name</code>s = $<code>lower_case_model_name</code>->search()->onlyTrashed()->latest()->get();
+
+        return View('<code>lower_case_model_name</code>.index', compact('<code>lower_case_model_name</code>s', 'trashed<code>model_name</code>s'));
+    }
+
+    public function create()
+    {
+        return View('<code>lower_case_model_name</code>.create');
+    }
+
+    public function store(<code>model_name</code>Request $request)
+    {
+        $<code>lower_case_model_name</code> = <code>model_name</code>::create($request->all());
+
+        return redirect()->route('<code>lower_case_model_name</code>.show', ['<code>lower_case_model_name</code>_id'=> $<code>lower_case_model_name</code>->id]);
+    }
+
+    public function show(<code>model_name</code> $<code>lower_case_model_name</code>)
+    {
+    return View('<code>lower_case_model_name</code>.show', compact('<code>lower_case_model_name</code>'));
+    }
+
+    public function edit(<code>model_name</code> $<code>lower_case_model_name</code>)
+    {
+        return View('<code>lower_case_model_name</code>.edit', compact('<code>lower_case_model_name</code>'));
+    }
+
+    public function update(<code>model_name</code> $<code>lower_case_model_name</code>, Requests\<code>model_name</code>Request $request)
+    {
+        $<code>lower_case_model_name</code>->update($request->all());
+
+        return redirect()->back();
+    }
+
+
+    public function destroy(<code>model_name</code> $<code>lower_case_model_name</code>)
+    {
+        $<code>lower_case_model_name</code>->delete();
+
+        return redirect()->back();
+    }
+
+    public function restore(<code>model_name</code> $<code>lower_case_model_name</code>)
+    {
+        $<code>lower_case_model_name</code>->restore();
+
+        return redirect()->back();
+    }
+}

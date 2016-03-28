@@ -1,0 +1,18 @@
+/*<code>model_name</code> routes*/
+
+/* Show */
+Route::get('<code>lower_case_model_name</code>/{<code>lower_case_model_name</code>_id}/show', ['as' => '<code>lower_case_model_name</code>.show', 'uses' => '<code>model_name</code>Controller@show', 'middleware' => 'acl:show-<code>lower_case_model_name</code>']);
+/* Search */
+Route::get('search/<code>lower_case_model_name</code>', ['as' => '<code>lower_case_model_name</code>.search', 'uses' => '<code>model_name</code>Controller@search',  'middleware' => 'acl:search-<code>lower_case_model_name</code>']);
+Route::get('<code>lower_case_model_name</code>s', ['as' => '<code>lower_case_model_name</code>.index', 'uses' => '<code>model_name</code>Controller@index', 'middleware' => 'acl:view-<code>lower_case_model_name</code>-index']);
+/* Edit */
+//wt = With Trashed
+Route::get('<code>lower_case_model_name</code>/{<code>lower_case_model_name</code>_id_wt}/edit', ['as' => '<code>lower_case_model_name</code>.edit', 'uses' => '<code>model_name</code>Controller@edit', 'middleware' => 'acl:edit-<code>lower_case_model_name</code>']);
+Route::put('<code>lower_case_model_name</code>/{<code>lower_case_model_name</code>_id_wt}/update', ['as' => '<code>lower_case_model_name</code>.update', 'uses' => '<code>model_name</code>Controller@update', 'middleware' => 'acl:edit-<code>lower_case_model_name</code>']);
+/* Create */
+Route::get('<code>lower_case_model_name</code>/create', ['as' => '<code>lower_case_model_name</code>.create', 'uses' => '<code>model_name</code>Controller@create', 'middleware' => 'acl:create-<code>lower_case_model_name</code>']);
+Route::post('<code>lower_case_model_name</code>', ['as' => '<code>lower_case_model_name</code>.store', 'uses' => '<code>model_name</code>Controller@store', 'middleware' => 'acl:create-<code>lower_case_model_name</code>']);
+/* Delete */
+Route::DELETE('<code>lower_case_model_name</code>/{<code>lower_case_model_name</code>_id}', ['as' => '<code>lower_case_model_name</code>.destroy', 'uses' => '<code>model_name</code>Controller@destroy', 'middleware' => 'acl:destroy-<code>lower_case_model_name</code>']);
+Route::post('<code>lower_case_model_name</code>/{<code>lower_case_model_name</code>_id_wt}/restore', ['as' => '<code>lower_case_model_name</code>.restore', 'uses' => '<code>model_name</code>Controller@restore', 'middleware' => 'acl:restore-<code>lower_case_model_name</code>']);
+/************************************************/

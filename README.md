@@ -12,7 +12,7 @@
 ### Requirements
     Laravel >=5.2
     PHP >= 5.5.9
-    Auto Loaded : [link-laravelcollective/html package for form & html](https://laravelcollective.com/docs/5.2/html)
+    Auto Loaded : [laravelcollective/html package for form & html](https://laravelcollective.com/docs/5.2/html)
 
 Generate the main classes that laravel use to work with database . Like model,controller,request,blade forms.
 
@@ -38,12 +38,27 @@ Generate the main classes that laravel use to work with database . Like model,co
     ],
 ```
 
-3. Publish assets files.
-``` bash
-    php artisan vendor:publish --tag=public --force
+3. Add these Form components to  **/app/Providers/AppServiceProvider.php** file in **boot()** method .
+``` php
+        \Form::component('mtText', 'zezont4.components.form.text', ['name', 'label', 'value' => null, 'attributes' => []]);
+        \Form::component('mtTel', 'zezont4.components.form.tel', ['name', 'label', 'value' => null, 'attributes' => []]);
+        \Form::component('mtPassword', 'zezont4.components.form.password', ['name', 'label', 'attributes' => []]);
+
+        \Form::component('mtRadio', 'zezont4.components.form.radio', ['name', 'label', 'value' => null, 'values', 'attributes' => []]);
+        \Form::component('mtCheck', 'zezont4.components.form.check', ['name', 'label', 'value' => null, 'values', 'attributes' => []]);
+        \Form::component('mtSelect', 'zezont4.components.form.select', ['name', 'label', 'value' => null, 'values', 'attributes' => []]);
+
+        \Form::component('mtButton', 'zezont4.components.form.button', ['label', 'class' => 'waves-light btn']);
+
+        \Form::component('mtStatic', 'zezont4.components.form.static', ['label', 'value']);
 ```
 
-3. Visit (http://your_host_name/**laravel_generator**)
+4. Publish assets and components files.
+``` bash
+    php artisan vendor:publish --force
+```
+
+5. Visit (http://your_host_name/**laravel_generator**)
 
 ## Credits
 

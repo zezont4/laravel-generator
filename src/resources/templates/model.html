@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\SearchFormHelper;
+use App\Traits\FlashMessageAfterSaving;
+
+class <code>model_name</code> extends Model
+{
+    use SoftDeletes;
+    use SearchFormHelper;
+    use FlashMessageAfterSaving;
+
+    protected $table = '<code>table_name</code>';
+
+    protected $fillable = [<code>selected_fields</code>];
+
+    /*
+    * my custom searchable fields that came from search form
+    */
+    public $searchableFields = [<code>selected_fields</code>];
+}
