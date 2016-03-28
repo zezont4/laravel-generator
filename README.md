@@ -1,17 +1,13 @@
 # Laravel Generator
 
-[![Latest Version on Packagist][ico-version]][link-packagist]
+[![Latest Version on Packagist][ico-version]][link-https://packagist.org/packages/zezont4/laravel-generator]
 [![Software License][ico-license]](LICENSE.md)
-[![Build Status][ico-travis]][link-travis]
-[![Coverage Status][ico-scrutinizer]][link-scrutinizer]
-[![Quality Score][ico-code-quality]][link-code-quality]
-[![Total Downloads][ico-downloads]][link-downloads]
 
 # Laravel 5 Generator
 
 ### Requirements
-    Laravel >=5.2
     PHP >= 5.5.9
+    Laravel >=5.2
     Auto Loaded : [laravelcollective/html package for form & html](https://laravelcollective.com/docs/5.2/html)
 
 Generate the main classes that laravel use to work with database . Like model,controller,request,blade forms.

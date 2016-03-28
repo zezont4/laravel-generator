@@ -4,12 +4,9 @@ namespace Zezont4\LaravelGenerator\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
-use Zezont4\LaravelGenerator\LaravelGeneratorServiceProvider as zezoService;
-
 
 class LaravelGeneratorController extends Controller
 {
-
 
     public function showTables()
     {
@@ -41,9 +38,17 @@ class LaravelGeneratorController extends Controller
         return redirect()->to('/laravel_generator/make_pages');
     }
 
+    public function writeToFile($fineName, $content)
+    {
+        $fineName = str_replace('//', '/', $fineName);
+        $myfile = fopen($fineName, "w") or die("Unable to open file!");
+        fwrite($myfile, $content);
+        fclose($myfile);
+    }
 
     public function makePages(Request $request)
     {
+//        dd(base_path('app'));
         $table_name = $request->has('table_name') ? $request->table_name : session('table_name');
         session()->put('table_name', $table_name);
         $primary_key = '';

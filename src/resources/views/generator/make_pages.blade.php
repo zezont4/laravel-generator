@@ -103,6 +103,11 @@ if (!function_exists('convertVariables')) {
         'description'=>"Copy to (app\\Models\\{$model_name}.php)",
         'url'=>'model.html'])
 
+    <?php
+
+    file_put_contents(base_path()."/app/Models/{$model_name}.php", convertVariables('model.html'));
+    ?>
+
     @include('package_views::layouts.code',[
         'id'=>'request',
         'language'=>'php',

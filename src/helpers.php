@@ -1,4 +1,7 @@
 <?php
+function zezo(){
+    return 'returned from zezo function in the helper file inside the package';
+}
 if (!function_exists('selected_fields')) {
     function selected_fields()
     {
