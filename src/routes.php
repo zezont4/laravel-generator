@@ -5,6 +5,6 @@ if (env('APP_ENV') == 'local') {
         Route::get('show_tables', 'LaravelGeneratorController@showTables');
         Route::get('{table}/show_fields', 'LaravelGeneratorController@showFields');
         Route::post('post_to_session', 'LaravelGeneratorController@postToSession');
-        Route::get('make_pages', 'LaravelGeneratorController@makePages');
+        Route::match(['get', 'post'],'make_pages', 'LaravelGeneratorController@makePages');
     });
 }

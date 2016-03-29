@@ -1,5 +1,5 @@
 <?php
-namespace Zezont4\LaravelGenerator\Http\Controllers;
+namespace Zezont4\LaravelGenerator\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -51,7 +51,6 @@ class LaravelGeneratorController extends Controller
 //        dd(base_path('app'));
         $table_name = $request->has('table_name') ? $request->table_name : session('table_name');
         session()->put('table_name', $table_name);
-        $primary_key = '';
         $model_name = $request->has('model_name') ? $request->model_name : ucfirst($table_name);
         session()->put('model_name', $model_name);
         $table_label = $request->has('table_label') ? $request->table_label : ucfirst($table_name);
@@ -63,7 +62,7 @@ class LaravelGeneratorController extends Controller
             foreach (session('fields')['field_name'] as $key => $field) {
 
                 if (session('fields')['key'][$key] == 'PRI') {
-                    $primary_key = $field;
+                    session()->put('primary_key', $field);
                 }
 
                 $label = session('fields')['field_comment'][$key];
@@ -81,7 +80,7 @@ class LaravelGeneratorController extends Controller
 
 
 //        dd($fields_array);
-        return view('package_views::generator.make_pages', compact('fields_array', 'table_name', 'primary_key', 'model_name', 'table_label'));
+            return view('package_views::generator.make_pages', compact('fields_array', 'table_name', 'primary_key', 'model_name', 'table_label'));
     }
 
 

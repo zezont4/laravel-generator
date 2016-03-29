@@ -1,8 +1,3 @@
-# Laravel Generator
-
-[![Latest Version on Packagist][ico-version]][link-https://packagist.org/packages/zezont4/laravel-generator]
-[![Software License][ico-license]](LICENSE.md)
-
 # Laravel 5 Generator
 
 ### Requirements
@@ -10,7 +5,18 @@
     Laravel >=5.2
     Auto Loaded : [laravelcollective/html package for form & html](https://laravelcollective.com/docs/5.2/html)
 
-Generate the main classes that laravel use to work with database . Like model,controller,request,blade forms.
+#### Select your MySql table then Laravel Generator will generate :
+-Model
+-Controller
+-Request
+-Forms (index,search,show,edit,create) using Materialize Css
+
+#### It's a little bit smart , So it will do the following:
+-Field comment in database will be the Label , if not exists thin the field name.
+-If the field does not allow Null then it will be required in the request.
+-If type of field is TINYINT(1) then the Input will be Radio (Optional).
+
+#### For security , It only work if *APP_ENV=local* in .env file.
 
 ## Installation
 
@@ -39,13 +45,10 @@ Generate the main classes that laravel use to work with database . Like model,co
         \Form::component('mtText', 'zezont4.components.form.text', ['name', 'label', 'value' => null, 'attributes' => []]);
         \Form::component('mtTel', 'zezont4.components.form.tel', ['name', 'label', 'value' => null, 'attributes' => []]);
         \Form::component('mtPassword', 'zezont4.components.form.password', ['name', 'label', 'attributes' => []]);
-
         \Form::component('mtRadio', 'zezont4.components.form.radio', ['name', 'label', 'value' => null, 'values', 'attributes' => []]);
         \Form::component('mtCheck', 'zezont4.components.form.check', ['name', 'label', 'value' => null, 'values', 'attributes' => []]);
         \Form::component('mtSelect', 'zezont4.components.form.select', ['name', 'label', 'value' => null, 'values', 'attributes' => []]);
-
         \Form::component('mtButton', 'zezont4.components.form.button', ['label', 'class' => 'waves-light btn']);
-
         \Form::component('mtStatic', 'zezont4.components.form.static', ['label', 'value']);
 ```
 
@@ -54,7 +57,7 @@ Generate the main classes that laravel use to work with database . Like model,co
     php artisan vendor:publish --force
 ```
 
-5. Visit (http://your_host_name/**laravel_generator**)
+5. Visit (http://your_host_name/*laravel_generator*)
 
 ## Credits
 

@@ -1,0 +1,18 @@
+/*<code>model_name</code> routes*/
+
+/* Show */
+Route::get('<code>lower_case_model_name</code>/{id}/show', ['as' => '<code>lower_case_model_name</code>.show', 'uses' => '<code>model_name</code>Controller@show']);
+/* Search */
+Route::get('search/<code>lower_case_model_name</code>', ['as' => '<code>lower_case_model_name</code>.search', 'uses' => '<code>model_name</code>Controller@search']);
+Route::get('<code>lower_case_model_name</code>s', ['as' => '<code>lower_case_model_name</code>.index', 'uses' => '<code>model_name</code>Controller@index']);
+/* Edit */
+//wt = With Trashed
+Route::get('<code>lower_case_model_name</code>/{id}/edit', ['as' => '<code>lower_case_model_name</code>.edit', 'uses' => '<code>model_name</code>Controller@edit']);
+Route::put('<code>lower_case_model_name</code>/{id}/update', ['as' => '<code>lower_case_model_name</code>.update', 'uses' => '<code>model_name</code>Controller@update']);
+/* Create */
+Route::get('<code>lower_case_model_name</code>/create', ['as' => '<code>lower_case_model_name</code>.create', 'uses' => '<code>model_name</code>Controller@create']);
+Route::post('<code>lower_case_model_name</code>', ['as' => '<code>lower_case_model_name</code>.store', 'uses' => '<code>model_name</code>Controller@store']);
+/* Delete */
+Route::delete('<code>lower_case_model_name</code>/{id}', ['as' => '<code>lower_case_model_name</code>.destroy', 'uses' => '<code>model_name</code>Controller@destroy']);
+Route::post('<code>lower_case_model_name</code>/{id}/restore', ['as' => '<code>lower_case_model_name</code>.restore', 'uses' => '<code>model_name</code>Controller@restore']);
+/************************************************/

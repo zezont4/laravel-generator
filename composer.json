@@ -26,5 +26,10 @@
         "files": [
             "src/helpers.php"
         ]
+    },
+    "scripts": {
+        "post-update-cmd": [
+            "php artisan vendor:publish --force"
+        ]
     }
 }

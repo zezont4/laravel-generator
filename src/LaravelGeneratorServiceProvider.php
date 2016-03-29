@@ -11,28 +11,28 @@ class LaravelGeneratorServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(realpath(__DIR__ . '/resources/views'), 'package_views');
 
-        $this->app->router->group(['namespace' => 'Zezont4\LaravelGenerator\Http\Controllers'], function ($router) {
-            require __DIR__ . '/Http/routes.php';
+        $this->app->router->group(['namespace' => 'Zezont4\LaravelGenerator\Controllers'], function ($router) {
+            require __DIR__ . '/routes.php';
         });
 
         $this->publishes([
-            __DIR__ . '/resources/assets' => public_path('zezont4/laravel_generator'),
+            __DIR__ . '/publish/assets' => public_path('zezont4/laravel_generator'),
         ], 'assets');
 
         $this->publishes([
-            __DIR__ . '/resources/views/components' => resource_path('views/zezont4/components'),
+            __DIR__ . '/publish/components' => resource_path('views/zezont4/components'),
         ], 'components');
 
         $this->publishes([
-            __DIR__ . '/resources/templates' => public_path('zezont4/laravel_generator/templates'),
+            __DIR__ . '/publish/templates' => public_path('zezont4/laravel_generator/templates'),
         ], 'templates');
 
         $this->publishes([
-            __DIR__ . '/Traits/FlashMessageAfterSaving.html' => app_path('Traits/FlashMessageAfterSaving.php'),
+            __DIR__ . '/publish/Traits/FlashMessageAfterSaving.html' => app_path('Traits/FlashMessageAfterSaving.php'),
         ], 'traits');
 
         $this->publishes([
-            __DIR__ . '/Traits/SearchFormHelper.html' => app_path('Traits/SearchFormHelper.php'),
+            __DIR__ . '/publish/Traits/SearchFormHelper.html' => app_path('Traits/SearchFormHelper.php'),
         ], 'traits');
     }
 
