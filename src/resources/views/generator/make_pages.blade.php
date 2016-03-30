@@ -81,6 +81,8 @@
 
     @include('package_views::layouts.views_pages',['page'=>'edit'])
 
+    @include('package_views::layouts.views_pages',['page'=>'index'])
+
     @if(\Request::has('_token'))
     <a href="/{{strtolower($model_name)}}/create">Visit {{$model_name}} create page</a>
     @endif

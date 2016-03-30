@@ -34,6 +34,8 @@ class LaravelGeneratorServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/publish/Traits/SearchFormHelper.html' => app_path('Traits/SearchFormHelper.php'),
         ], 'traits');
+
+        $this->loadZezont4Components();
     }
 
 
@@ -42,6 +44,22 @@ class LaravelGeneratorServiceProvider extends ServiceProvider
         $this->app->bind('LaravelGenerator', function ($app) {
             return new LaravelGenerator($app);
         });
+    }
+
+
+    public function loadZezont4Components()
+    {
+        \Form::component('mtText', 'zezont4.components.form.text', ['name', 'label', 'value' => null, 'attributes' => []]);
+        \Form::component('mtTel', 'zezont4.components.form.tel', ['name', 'label', 'value' => null, 'attributes' => []]);
+        \Form::component('mtPassword', 'zezont4.components.form.password', ['name', 'label', 'attributes' => []]);
+
+        \Form::component('mtRadio', 'zezont4.components.form.radio', ['name', 'label', 'value' => null, 'values', 'attributes' => []]);
+        \Form::component('mtCheck', 'zezont4.components.form.check', ['name', 'label', 'value' => null, 'values', 'attributes' => []]);
+        \Form::component('mtSelect', 'zezont4.components.form.select', ['name', 'label', 'value' => null, 'values', 'attributes' => []]);
+
+        \Form::component('mtButton', 'zezont4.components.form.button', ['label', 'class' => 'waves-light btn']);
+
+        \Form::component('mtStatic', 'zezont4.components.form.static', ['label', 'value']);
     }
 
 }

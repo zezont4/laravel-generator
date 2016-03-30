@@ -109,7 +109,7 @@ if (!function_exists('generateMaterializeFormPage')) {
     function generateMaterializeFormPage(Array $fields, $model_name, $page_title)
     {
         $htmlCode = "";
-        $lower_model_name = strtolower($model_name);
+//        $lower_model_name = strtolower($model_name);
         foreach ($fields as $field) {
             if ($field['is_selected']) {
                 $type = $field['type'];
@@ -170,7 +170,7 @@ if (!function_exists('generateMaterializeCreatePage')) {
 }
 
 if (!function_exists('generateMaterializeEditPage')) {
-    function generateMaterializeEditPage($model_name, $page_title,$primary_key)
+    function generateMaterializeEditPage($model_name, $page_title, $primary_key)
     {
         $lower_model_name = strtolower($model_name);
 
@@ -181,7 +181,7 @@ if (!function_exists('generateMaterializeEditPage')) {
 
 @section('content')
 
-    {!! \\Form::model($" . $lower_model_name . ", ['route' => ['" . $lower_model_name . ".update', $" . $lower_model_name . "->".$primary_key."], 'method' => 'put']) !!}
+    {!! \\Form::model($" . $lower_model_name . ", ['route' => ['" . $lower_model_name . ".update', $" . $lower_model_name . "->" . $primary_key . "], 'method' => 'put']) !!}
 
     @include('" . $lower_model_name . "._form',['btnLabel' => 'تحديث','formType' => 'update'])
 
@@ -191,16 +191,99 @@ if (!function_exists('generateMaterializeEditPage')) {
 
          <p class='left red-text lighten-2 mid-size-font'>هذا السجل محذوف</p>
 
-        {{ \\Form::open(['route' => ['" . $lower_model_name . ".restore', \$" . $lower_model_name . "->".$primary_key."]]) }}
+        {{ \\Form::open(['route' => ['" . $lower_model_name . ".restore', \$" . $lower_model_name . "->" . $primary_key . "]]) }}
         {{ \\Form::mtButton('استعادة', 'left btn-flat waves-green green-text') }}
         {{ \\Form::close() }}
     @else
-        {{ \\Form::open(['route' => ['" . $lower_model_name . ".destroy', \$" . $lower_model_name . "->".$primary_key."], 'method' => 'delete']) }}
+        {{ \\Form::open(['route' => ['" . $lower_model_name . ".destroy', \$" . $lower_model_name . "->" . $primary_key . "], 'method' => 'delete']) }}
         {{ \\Form::mtButton('حذف', 'left btn-flat waves-red red-text') }}
         {{ \\Form::close() }}
     @endif
 
 @stop";
+        return $htmlCode;
+    }
+}
+
+if (!function_exists('generateMaterializeIndexPage')) {
+    function generateMaterializeIndexPage(Array $fields, $model_name, $page_title, $primary_key)
+    {
+        $lower_model_name = strtolower($model_name);
+        $htmlCode = "
+@extends('layouts.master')
+@section('title','$page_title')
+@section('content')
+
+@if(count($" . $lower_model_name . "s))
+
+ <table class='highlight responsive-table'>
+    <thead>
+        <tr>
+
+";
+        foreach ($fields as $field) {
+            if ($field['is_selected']) {
+                $htmlCode .= "\t\t<th><a href=\"{{route('" . $lower_model_name . ".index', \Request::except('sort') + ['sort' => '" . $field['name'] . "']  ) }}\">{$field['label']}</a></th>\n";
+            }
+        }
+        $htmlCode .= "
+        <th>&nbsp;</th>
+        </tr>
+
+    </thead>
+    <tr>";
+
+        foreach ($fields as $field) {
+            if ($field['is_selected']) {
+                if ($field['type']=='text') {
+                    $htmlCode .= "\t\t<td><input type='text'></td>\n";
+                }
+            }
+        }
+        $htmlCode .= "
+        <td>&nbsp;</td>
+        </tr>
+        ";
+
+        $htmlCode .= "@foreach($" . $lower_model_name . "s as $" . $lower_model_name . ")
+    <tr>
+   ";
+        foreach ($fields as $field) {
+            if ($field['is_selected']) {
+                $htmlCode .= "\t\t<td>{{ $" . $lower_model_name . "->" . $field['name'] . "  }}</td>\n";
+            }
+        }
+        $htmlCode .= "
+    \t<td><a href=\"{{ route('" . $lower_model_name . ".edit',  ['id' => $" . $lower_model_name . "->" . $primary_key . "] ) }}\">تعديل</a></td>
+    <tr>
+    @endforeach
+</table>
+    <div class='section'>
+        {!! $" . $lower_model_name . "s->appends(\Request::query())->render() !!}
+    </div>
+
+    @else
+        <div class='center-align red-text lighten-2'>
+            <h3>لا توجد نتائج </h3>
+        </div>
+@endif
+
+@if($" . $lower_model_name . "s->currentPage()>=$" . $lower_model_name . "s->lastPage())
+        @include('layouts.trashed',[
+        'modelName' => '" . $lower_model_name . "',
+        'trashed' => \$trashed" . $lower_model_name . "s,
+         'data' => [
+         ";
+        foreach ($fields as $field) {
+            if ($field['is_selected']) {
+                $htmlCode .= "\t\t'{$field['label']}' => '{$field['name']}',\n";
+            }
+        }
+        $htmlCode .= "]
+        ])
+@endif
+@stop";
+
         return $htmlCode;
     }
 }
