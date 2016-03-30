@@ -6,6 +6,8 @@
     Laravel >=5.2
     Auto Loaded : [laravelcollective/html package for form & html](https://laravelcollective.com/docs/5.2/html)
 
+## HOW IT WORKS ?
+
 #### Select your MySql table then Laravel Generator will generate :
 -Model
 -Controller
