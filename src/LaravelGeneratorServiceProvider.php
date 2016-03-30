@@ -36,6 +36,8 @@ class LaravelGeneratorServiceProvider extends ServiceProvider
         ], 'traits');
 
         $this->loadZezont4Components();
+
+        $this->loadZezont4BladeDirectives();
     }
 
 
@@ -62,4 +64,17 @@ class LaravelGeneratorServiceProvider extends ServiceProvider
         \Form::component('mtStatic', 'zezont4.components.form.static', ['label', 'value']);
     }
 
+    public function loadZezont4BladeDirectives()
+    {
+        Blade::directive('hasRole', function ($role_slug) {
+            return "<?php if (auth()->check()) :
+				if (auth()->user()->hasRole{$role_slug}) : ?>";
+        });
+
+        Blade::directive('endhasRole', function () {
+            return "<?php endif; endif; ?>";
+        });
+    }
+
 }
+
