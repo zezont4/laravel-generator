@@ -16,6 +16,14 @@ class <code>model_name</code>Request extends Request
         return true;
     }
 
+    public function messages()
+    {
+        return [
+            /*'birth_date.before' => 'berth date must be at least one day before :date ,*/
+        ];
+    }
+
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -23,7 +31,8 @@ class <code>model_name</code>Request extends Request
      */
     public function rules()
     {
-        //$<code>lower_case_model_name</code>_id = @$this-><code>lower_case_model_name</code>_id_wt->id or '';
+        //$id = @$this->->id or '';
+
         return [
         <code>required_fields</code>
         ];

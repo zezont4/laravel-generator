@@ -1,5 +1,8 @@
 @if(file_exists(base_path()."/resources/views/".strtolower($model_name)."/{$page}.blade.php"))
-    <span class = "alert yellow lighten-1 md-size-font">File already exists. for protection, copy it manually</span>
+    <div class="chip yellow lighten-1 md-size-font">
+        يوجد ملف بنفس الإسم
+        <i class="material-icons">close</i>
+    </div>
 @else
     @if(!is_dir(base_path()."/resources/views/".strtolower($model_name)))
         @if(mkdir(base_path()."/resources/views/".strtolower($model_name)))

@@ -477,13 +477,13 @@ ul.side-nav.fixed li.logo:hover {
 
 #logo-container {
     height: 57px;
-    margin-bottom: 32px;
+    /*margin-bottom: 32px;*/
 }
 
 ul.side-nav.fixed li.logo {
     text-align: center;
-    margin-top: 20px;
-    margin-bottom: 50px;
+    margin-top: 14px;
+    margin-bottom: 8px;
 }
 
 ul.side-nav.fixed ul.collapsible-accordion {

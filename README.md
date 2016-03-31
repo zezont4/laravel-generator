@@ -23,12 +23,14 @@
 
 ## Installation
 
-1. Run
+1.  Run
+
 ``` bash
     composer require zezont4/LaravelGenerator
 ```
 
-2. Add service provider & Aliases to **/config/app.php** file.
+2.  Add service provider & Aliases to **/config/app.php** file.
+
 ``` php
     'providers' => [
         \\ Other Providers,
@@ -43,12 +45,15 @@
     ],
 ```
 
-3. Publish assets and components files.
+3.  Publish assets and components files.
+
 ``` bash
     php artisan vendor:publish --force
 ```
 
-4. Visit (http://your_host_name/*laravel_generator*)
+4.  Visit (http://your_host_name/*laravel_generator*)
+
+5.  Create *(layouts/master.blade.php)* in resources/views/ that have *(@yield('content'))* 
 
 ## Credits
 

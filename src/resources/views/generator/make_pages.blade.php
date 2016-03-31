@@ -33,6 +33,7 @@
         'description'=>'Copy to "app\Http\Routes.php".',
         'page_name'=>'routes_without_middleware.html'])
 
+    @include('package_views::layouts.views_pages',['page'=>'language'])
     {{--@include('package_views::layouts.code',[
         'id'=>'RouteServiceProvider',
         'language'=>'php',
@@ -73,18 +74,27 @@
         'write_to_path'=>"Http/Controllers/{$model_name}Controller"])
 
 
+
+
     @include('package_views::layouts.views_pages',['page'=>'_form'])
 
     @include('package_views::layouts.views_pages',['page'=>'show'])
 
     @include('package_views::layouts.views_pages',['page'=>'create'])
+    @if(file_exists(base_path()."/resources/views/".strtolower($model_name)."/create.blade.php"))
+        <a href = "/{{strtolower($model_name)}}/create">Visit {{$model_name}} create page</a>
+    @endif
 
     @include('package_views::layouts.views_pages',['page'=>'edit'])
 
     @include('package_views::layouts.views_pages',['page'=>'index'])
+    @if(file_exists(base_path()."/resources/views/".strtolower($model_name)."/index.blade.php"))
+        <a href = "/{{strtolower($model_name)}}s">Visit {{$model_name}} index page</a>
+    @endif
 
-    @if(\Request::has('_token'))
-    <a href="/{{strtolower($model_name)}}/create">Visit {{$model_name}} create page</a>
+    @include('package_views::layouts.views_pages',['page'=>'search'])
+    @if(file_exists(base_path()."/resources/views/".strtolower($model_name)."/search.blade.php"))
+        <a href = "/search/{{strtolower($model_name)}}">Visit {{$model_name}} search page</a>
     @endif
 
 @stop

@@ -14,12 +14,10 @@
 
         <li class="logo no-padding">
             <a id="logo-container" href="/" class="brand-logo">
-                <img id="front-page-logo" height="85" class="logo" src="{{ asset('zezont4/laravel_generator/image/techcloud-red-grey.png') }}">
+                <img id="front-page-logo" width="190" class="logo" src="{{ asset('zezont4/laravel_generator/image/laravel-generator-200.png') }}">
             </a>
         </li>
-
-        <div class="center-align grey-text">Laravel Generator</div>
-
+        <li class="divider"></li>
         <li><a href="/laravel_generator/show_tables" class="waves-effect waves-teal">بدء العملية</a></li>
         <li class="no-padding">
 

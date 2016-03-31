@@ -8,13 +8,32 @@ if (!function_exists('yse_no')) {
             1 => 'نعم',
         ];
 
-        if ($value) {
-            return $yes_no[$value];
+        if (!is_null($value)) {
+            if ($value === 0 || $value === 1) {
+                return $yes_no[$value];
+            } elseif ($value !== 0 && $value !== 1) {
+                return 'غير معروف';
+            }
+        } else {
+            return $yes_no;
         }
 
-        return $yes_no;
     }
 }
+if (!function_exists('generateLanguagePage')) {
+    function generateLanguagePage()
+    {
+        $required_fields = '';
+        foreach (session('fields_array') as $field) {
+            if ($field['is_selected'] && $field['is_required']) {
+                $required_fields .= "'" . $field['name'] . "'   =>  '" . $field['label'] . "',\n\t\t";
+            }
+        }
+
+        return $required_fields;
+    }
+}
+
 if (!function_exists('selected_fields')) {
     function selected_fields()
     {
@@ -34,7 +53,7 @@ if (!function_exists('required_fields')) {
     {
         $required_fields = '';
         foreach (session('fields_array') as $field) {
-            if ($field['is_required']) {
+            if ($field['is_selected'] && $field['is_required']) {
                 $required_fields .= "'" . $field['name'] . "'   =>  'required',\n\t\t";
             }
         }
@@ -67,7 +86,7 @@ if (!function_exists('convertVariables')) {
 }
 
 if (!function_exists('generateMaterializeShowPage')) {
-    function generateMaterializeShowPage(Array $fields, $model_name, $page_title)
+    function generateMaterializeShowPage($model_name, $page_title, $primary_key)
     {
         $htmlCode = "
 @extends('layouts.master')
@@ -79,7 +98,7 @@ if (!function_exists('generateMaterializeShowPage')) {
 ";
         $lower_model_name = strtolower($model_name);
 
-        foreach ($fields as $field) {
+        foreach (session('fields_array') as $field) {
             if ($field['is_selected']) {
                 $type = $field['type'];
                 if ($type == 'select' || $type == 'radio' || $type == 'checkbox') {
@@ -96,7 +115,7 @@ if (!function_exists('generateMaterializeShowPage')) {
         }
         $htmlCode .= "
     <div class='section'>
-        <a class='waves-effect waves-light btn left red lighten-2' href='{{route('{$lower_model_name}.edit',$" . $lower_model_name . "->id)}}'>تعديل</a>
+        <a class='waves-effect waves-light btn left red lighten-2' href='{{route('{$lower_model_name}.edit',$" . $lower_model_name . "->" . $primary_key . ")}}'>تعديل</a>
     </div>
 
 @stop";
@@ -106,11 +125,11 @@ if (!function_exists('generateMaterializeShowPage')) {
 }
 
 if (!function_exists('generateMaterializeFormPage')) {
-    function generateMaterializeFormPage(Array $fields, $model_name, $page_title)
+    function generateMaterializeFormPage()
     {
         $htmlCode = "";
 //        $lower_model_name = strtolower($model_name);
-        foreach ($fields as $field) {
+        foreach (session('fields_array') as $field) {
             if ($field['is_selected']) {
                 $type = $field['type'];
                 if ($type == 'text') {
@@ -206,22 +225,22 @@ if (!function_exists('generateMaterializeEditPage')) {
 }
 
 if (!function_exists('generateMaterializeIndexPage')) {
-    function generateMaterializeIndexPage(Array $fields, $model_name, $page_title, $primary_key)
+    function generateMaterializeIndexPage($model_name, $page_title, $primary_key)
     {
         $lower_model_name = strtolower($model_name);
         $htmlCode = "
 @extends('layouts.master')
 @section('title','$page_title')
 @section('content')
-
+<a title='إضافة جديد' href='{{route(\"" . $lower_model_name . ".create\")}}' class='btn waves-effect waves-light  blue'>جديد<i class=\"material-icons left\">add</i></a>
+<a title='بحث متقدم' href='{{route(\"" . $lower_model_name . ".search\")}}' class='btn waves-effect waves-light left blue'>بحث متقدم<i class=\"material-icons left\">search</i></a>
 @if(count($" . $lower_model_name . "s))
 
  <table class='highlight responsive-table'>
     <thead>
         <tr>
-
 ";
-        foreach ($fields as $field) {
+        foreach (session('fields_array') as $field) {
             if ($field['is_selected']) {
                 $htmlCode .= "\t\t<th><a href=\"{{route('" . $lower_model_name . ".index', \Request::except('sort') + ['sort' => '" . $field['name'] . "']  ) }}\">{$field['label']}</a></th>\n";
             }
@@ -230,27 +249,41 @@ if (!function_exists('generateMaterializeIndexPage')) {
         <th>&nbsp;</th>
         </tr>
 
-    </thead>
-    <tr>";
+        </thead>
+        <tr class='hide-on-print-only'>
+{{ Form::open(['route' => '" . $lower_model_name . ".index', 'method' => 'get']) }}
+    ";
 
-        foreach ($fields as $field) {
+        foreach (session('fields_array') as $field) {
             if ($field['is_selected']) {
-                if ($field['type']=='text') {
-                    $htmlCode .= "\t\t<td><input type='text'></td>\n";
+                if ($field['type'] == 'text') {
+                    $htmlCode .= "\t\t<td>{{ \\Form::text('{$field['name']}',request('{$field["name"]}', \$default = null))}}</td>\n";
+                } elseif ($field['type'] == 'radio' || $field['type'] == 'check') {
+                    $htmlCode .= "\t\t<td>{{ \\Form::select('{$field['name']}',yes_no(),request('{$field["name"]}', \$default = null),['placeholder' => 'اختر..','class'=>'browser-default'])}}</td>\n";
+                } elseif ($field['type'] != 'text') {
+                    $htmlCode .= "\t\t<td>&nbsp;</td>\n";
                 }
             }
         }
+
         $htmlCode .= "
-        <td>&nbsp;</td>
+        <td><input type='submit'  value='  بحث  ' class='btn no-padding blue' /></td>
+        {{ Form::close() }}
         </tr>
+
         ";
 
         $htmlCode .= "@foreach($" . $lower_model_name . "s as $" . $lower_model_name . ")
     <tr>
    ";
-        foreach ($fields as $field) {
+        foreach (session('fields_array') as $field) {
+            $type = $field['type'];
             if ($field['is_selected']) {
-                $htmlCode .= "\t\t<td>{{ $" . $lower_model_name . "->" . $field['name'] . "  }}</td>\n";
+                if ($type == 'select' || $type == 'radio' || $type == 'checkbox') {
+                    $htmlCode .= "\t\t<td>{{  yes_no($" . $lower_model_name . "->" . $field['name'] . ") }}</td>\n";
+                } else {
+                    $htmlCode .= "\t\t<td>{{ $" . $lower_model_name . "->" . $field['name'] . "  }}</td>\n";
+                }
             }
         }
         $htmlCode .= "
@@ -269,12 +302,13 @@ if (!function_exists('generateMaterializeIndexPage')) {
 @endif
 
 @if($" . $lower_model_name . "s->currentPage()>=$" . $lower_model_name . "s->lastPage())
-        @include('layouts.trashed',[
-        'modelName' => '" . $lower_model_name . "',
-        'trashed' => \$trashed" . $lower_model_name . "s,
-         'data' => [
+        @if(isset(\$trashed" . $lower_model_name . "s))
+            @include('layouts.trashed',[
+            'modelName' => '" . $lower_model_name . "',
+            'trashed' => \$trashed" . $lower_model_name . "s,
+             'data' => [
          ";
-        foreach ($fields as $field) {
+        foreach (session('fields_array') as $field) {
             if ($field['is_selected']) {
                 $htmlCode .= "\t\t'{$field['label']}' => '{$field['name']}',\n";
             }
@@ -282,6 +316,33 @@ if (!function_exists('generateMaterializeIndexPage')) {
         $htmlCode .= "]
         ])
 @endif
+@endif
+@stop";
+
+        return $htmlCode;
+    }
+}
+
+if (!function_exists('generateMaterializeSearchPage')) {
+    function generateMaterializeSearchPage($model_name, $page_title)
+    {
+        $lower_model_name = strtolower($model_name);
+
+        $htmlCode = "
+@extends('layouts.master')
+
+@section('title','$page_title / بحث')
+
+{{--@section('container_style','max-width: 602px;')--}}
+
+@section('content')
+
+    {{ Form::open(['route' => '" . $lower_model_name . ".index', 'method' => 'get']) }}
+
+    @include('" . $lower_model_name . "._form',['btnLabel' => 'بحث','formType' => 'search'])
+
+    {{ Form::close() }}
+
 @stop";
 
         return $htmlCode;
