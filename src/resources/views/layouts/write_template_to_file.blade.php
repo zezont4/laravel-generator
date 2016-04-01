@@ -5,7 +5,7 @@
         <i class="material-icons">close</i>
     </div>
 @else
-    @if(file_put_contents(base_path()."/app/{$write_to_path}.php", convertVariables("{$page_name}")))
+    @if(file_put_contents(base_path()."/app/{$write_to_path}.php", convertTemplateVariables("{$page_name}")))
         <span class="green-text md-size-font">File Created Successfully</span>
     @endif
 @endif

@@ -43,9 +43,9 @@ class LaravelGeneratorServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->app->bind('LaravelGenerator', function ($app) {
-            return new LaravelGenerator($app);
-        });
+//        $this->app->bind('LaravelGenerator', function ($app) {
+//            return new LaravelGenerator($app);
+//        });
     }
 
 

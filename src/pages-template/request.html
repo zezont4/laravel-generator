@@ -31,10 +31,16 @@ class <code>model_name</code>Request extends Request
      */
     public function rules()
     {
-        //$id = @$this->->id or '';
+
+        $updated_id = $this->route()->id or '';
 
         return [
-        <code>required_fields</code>
+            /*Unique Example*/
+            /*'national_id' => "unique:students,national_id,updated_id,id"*/
+            /*              unique:table name,column,except value,idColumn*/
+            /*Spaces are not allowed between comma(,)*/
+
+            <code>required_fields</code>
         ];
     }
 }

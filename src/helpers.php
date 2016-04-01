@@ -62,10 +62,10 @@ if (!function_exists('required_fields')) {
     }
 }
 
-if (!function_exists('convertVariables')) {
-    function convertVariables($path)
+if (!function_exists('convertTemplateVariables')) {
+    function convertTemplateVariables($page_name)
     {
-        $content = file_get_contents('http://' . $_SERVER['HTTP_HOST'] . "/zezont4/laravel_generator/templates/{$path}");
+        $content = file_get_contents(base_path() . "vendor/zezont4/laravel-generator/src/pages-template/{$page_name}");
         $prefix = '<code>';
         $suffix = '</code>';
         $replace_with = [
