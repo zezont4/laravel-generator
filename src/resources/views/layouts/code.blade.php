@@ -24,7 +24,7 @@
 <div class="row remove-margin-bottom">
     <pre class="language-{{$language}}">
         <code class="language-{{$language}}" id="{{$id}}_code">
-            {{convertVariables($page_name)}}
+            {{convertTemplateVariables($page_name)}}
         </code>
     </pre>
 </div>
