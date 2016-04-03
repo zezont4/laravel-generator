@@ -1,7 +1,7 @@
 @extends('package_views::layouts.master')
 @section('title','صفحة إنشاء الأكواد - Code Generation')
 @section('header')
-    <link rel = "stylesheet" href = "{{asset('zezont4/laravel_generator/css/prism.css')}}">
+    <link rel="stylesheet" href="{{asset('zezont4/laravel_generator/css/prism.css')}}">
     <style>
         pre {
             direction: ltr;
@@ -10,7 +10,7 @@
     </style>
 @stop
 @section('content')
-    <form method = "post" action = "/laravel_generator/make_pages">
+    <form method="post" action="/laravel_generator/make_pages">
         {{ csrf_field() }}
 
         {{\Form::mtText('model_name','اسم المودل - Model Name',$model_name)}}
@@ -52,6 +52,10 @@
         'description'=>'if you need timestamps then run this in mysql.',
         'page_name'=>'sql.html'])
 
+
+    @if(!is_dir(app_path()."/Models"))
+        <?php mkdir(app_path() . "/Models");?>
+    @endif
     @include('package_views::layouts.code',[
         'id'=>'model',
         'language'=>'php',
@@ -82,25 +86,25 @@
 
     @include('package_views::layouts.views_pages',['page'=>'create'])
     @if(file_exists(base_path()."/resources/views/".strtolower($model_name)."/create.blade.php"))
-        <a href = "/{{strtolower($model_name)}}/create">Visit {{$model_name}} create page</a>
+        <a href="/{{strtolower($model_name)}}/create">Visit {{$model_name}} create page</a>
     @endif
 
     @include('package_views::layouts.views_pages',['page'=>'edit'])
 
     @include('package_views::layouts.views_pages',['page'=>'index'])
     @if(file_exists(base_path()."/resources/views/".strtolower($model_name)."/index.blade.php"))
-        <a href = "/{{strtolower($model_name)}}s">Visit {{$model_name}} index page</a>
+        <a href="/{{strtolower($model_name)}}s">Visit {{$model_name}} index page</a>
     @endif
 
     @include('package_views::layouts.views_pages',['page'=>'search'])
     @if(file_exists(base_path()."/resources/views/".strtolower($model_name)."/search.blade.php"))
-        <a href = "/search/{{strtolower($model_name)}}">Visit {{$model_name}} search page</a>
+        <a href="/search/{{strtolower($model_name)}}">Visit {{$model_name}} search page</a>
     @endif
 
 @stop
 
 @section('footer')
-    <script src = "{{asset('zezont4/laravel_generator/js/prism.js')}}"></script>
+    <script src="{{asset('zezont4/laravel_generator/js/prism.js')}}"></script>
     <script>
         function selectElementContents(el) {
             if (window.getSelection && document.createRange) {

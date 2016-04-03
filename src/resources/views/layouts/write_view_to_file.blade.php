@@ -5,10 +5,9 @@
     </div>
 @else
     @if(!is_dir(base_path()."/resources/views/".strtolower($model_name)))
-        @if(mkdir(base_path()."/resources/views/".strtolower($model_name)))
-        @endif
+        <?php mkdir(base_path() . "/resources/views/" . strtolower($model_name));?>
     @endif
     @if(file_put_contents(base_path()."/resources/views/".strtolower($model_name)."/{$page}.blade.php", $text_content))
-        <span class = "green-text md-size-font">File Created Successfully</span>
+        <span class="green-text md-size-font">File Created Successfully</span>
     @endif
 @endif

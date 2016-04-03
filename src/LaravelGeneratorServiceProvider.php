@@ -23,15 +23,12 @@ class LaravelGeneratorServiceProvider extends ServiceProvider
             __DIR__ . '/publish/components' => resource_path('views/zezont4/components'),
         ], 'components');
 
-        $this->publishes([
-            __DIR__ . '/publish/templates' => public_path('zezont4/laravel_generator/templates'),
-        ], 'templates');
+//        $this->publishes([
+//            __DIR__ . '/publish/templates' => public_path('zezont4/laravel_generator/templates'),
+//        ], 'templates');
 
         $this->publishes([
             __DIR__ . '/publish/Traits/FlashMessageAfterSaving.html' => app_path('Traits/FlashMessageAfterSaving.php'),
-        ], 'traits');
-
-        $this->publishes([
             __DIR__ . '/publish/Traits/SearchFormHelper.html' => app_path('Traits/SearchFormHelper.php'),
         ], 'traits');
 

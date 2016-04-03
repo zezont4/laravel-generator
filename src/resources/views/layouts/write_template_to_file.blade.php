@@ -1,4 +1,3 @@
-
 @if(file_exists(base_path()."/app/{$write_to_path}.php"))
     <div class="chip yellow lighten-1 md-size-font">
         يوجد ملف بنفس الإسم

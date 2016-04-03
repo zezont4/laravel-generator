@@ -13,24 +13,23 @@
 -Controller
 -Request
 -Forms (index,search,show,edit,create) using Materialize Css
+-You can copy (Routs,language)
+
 
 #### It's a little bit smart , So it will do the following:
 -Field comment in database will be the Label , if not exists thin the field name.
 -If the field does not allow Null then it will be required in the request.
 -If type of field is TINYINT(1) then the Input will be Radio (Optional).
 
-#### For security , It only work if *APP_ENV=local* in .env file.
+#### For security , It only works if *APP_ENV=local* in .env file.
 
 ## Installation
 
 1.  Run
-
 ``` bash
     composer require zezont4/LaravelGenerator
 ```
-
 2.  Add service provider & Aliases to **/config/app.php** file.
-
 ``` php
     'providers' => [
         \\ Other Providers,
@@ -44,15 +43,11 @@
         'Html' => Collective\Html\HtmlFacade::class,
     ],
 ```
-
 3.  Publish assets and components files.
-
 ``` bash
     php artisan vendor:publish --force
 ```
-
 4.  Visit (http://your_host_name/*laravel_generator*)
-
 5.  Create *(layouts/master.blade.php)* in resources/views/ that have *(@yield('content'))* 
 
 ## Credits
