@@ -65,7 +65,7 @@ if (!function_exists('required_fields')) {
 if (!function_exists('convertTemplateVariables')) {
     function convertTemplateVariables($page_name)
     {
-        $content = file_get_contents(base_path() . "/../vendor/zezont4/laravel-generator/src/pages-template/{$page_name}");
+        $content = file_get_contents(base_path() . "/vendor/zezont4/laravel-generator/src/pages-template/{$page_name}");
         $prefix = '<code>';
         $suffix = '</code>';
         $replace_with = [
