@@ -9,17 +9,19 @@
 ## HOW IT WORKS ?
 
 #### Select your MySql table then Laravel Generator will generate :
--Model
--Controller
--Request
--Forms (index,search,show,edit,create) using Materialize Css
--You can copy (Routs,language)
+-Model.
+-Controller.
+-Request.
+-Forms (index "with filters and sorting",search,show,edit,create) using Materialize Css.
+-Auto generated Routs and language array.
 
 
 #### It's a little bit smart , So it will do the following:
 -Field comment in database will be the Label , if not exists thin the field name.
+-If type of field is TINYINT(1) then the Input type will be Radio (Optional).
 -If the field does not allow Null then it will be required in the request.
--If type of field is TINYINT(1) then the Input will be Radio (Optional).
+-if field is set to be unique in database the a **unique** validation will be set.
+-if type of field is int the a **numeric** validation will be set.
 
 #### For security , It only works if *APP_ENV=local* in .env file.
 
@@ -48,31 +50,9 @@
     php artisan vendor:publish --force
 ```
 4.  Visit (http://your_host_name/*laravel_generator*)
-5.  Create *(layouts/master.blade.php)* in resources/views/ that have *(@yield('content'))* 
-#### master.blade.php template
-``` html
-<!DOCTYPE html>
-<html>
-    <head>
-        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div class = "container">
-            <div class = "section">
-                <div class = "row">
-                    <div class = "col s12">
-                        @yield('content')
-                    </div>
-                </div>
-            </div>
-        </div>
-        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
-    </body>
-</html>
-```
+5.  Copy layouts files from **resources/views/copy_to_layouts** to **resources/views/layouts**.
+6.  Copy assets  files from **public/copy_to_public**           to **public root**.
+
 
 ## Credits
 

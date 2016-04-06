@@ -328,10 +328,11 @@ if (!function_exists('generateMaterializeIndexPage')) {
 @endif
 
 @if($" . $lower_model_name . "s->currentPage()>=$" . $lower_model_name . "s->lastPage())
-        @if(isset(\$trashed" . $lower_model_name . "s))
+        @if(isset(\$trashed" . $model_name . "s))
             @include('layouts.trashed',[
-            'modelName' => '" . $lower_model_name . "',
-            'trashed' => \$trashed" . $lower_model_name . "s,
+            'model_name' => '" . $lower_model_name . "',
+            'primary_key' => '" . $primary_key . "',
+            'trashed' => \$trashed" . $model_name . "s,
              'data' => [
          ";
 		foreach (session('fields_array') as $field) {
