@@ -5,31 +5,42 @@ use Illuminate\Support\ServiceProvider;
 
 class LaravelGeneratorServiceProvider extends ServiceProvider
 {
+    public function register()
+    {
+//        $this->app->bind('laravelGenerator', function ($app) {
+//            return new LaravelGenerator;
+//        });
+    }
 
     public function boot()
     {
-
-        $this->loadViewsFrom(realpath(__DIR__ . '/resources/views'), 'package_views');
-
         $this->app->router->group(['namespace' => 'Zezont4\LaravelGenerator\Controllers'], function ($router) {
             require __DIR__ . '/routes.php';
         });
 
+        $this->loadViewsFrom(realpath(__DIR__ . '/resources/views'), 'package_views');
+
+
+        $this->publishes([
+            __DIR__ . '/publish/config/zlg.php' => config_path('zlg.php'),
+        ], 'config');
+
         $this->publishes([
             __DIR__ . '/publish/assets' => public_path('zezont4/laravel_generator'),
+            __DIR__ . '/publish/assets' => public_path('copy_to_public'),
         ], 'assets');
 
         $this->publishes([
             __DIR__ . '/publish/components' => resource_path('views/zezont4/components'),
         ], 'components');
 
-//        $this->publishes([
-//            __DIR__ . '/publish/templates' => public_path('zezont4/laravel_generator/templates'),
-//        ], 'templates');
+		$this->publishes([
+            __DIR__ . '/publish/copy_to_layouts' => resource_path('views/copy_to_layouts'),
+        ], 'layouts');
 
         $this->publishes([
             __DIR__ . '/publish/Traits/FlashMessageAfterSaving.html' => app_path('Traits/FlashMessageAfterSaving.php'),
-            __DIR__ . '/publish/Traits/SearchFormHelper.html' => app_path('Traits/SearchFormHelper.php'),
+            __DIR__ . '/publish/Traits/SearchFormHelper.html'        => app_path('Traits/SearchFormHelper.php'),
         ], 'traits');
 
         $this->loadZezont4Components();
@@ -38,19 +49,13 @@ class LaravelGeneratorServiceProvider extends ServiceProvider
     }
 
 
-    public function register()
-    {
-//        $this->app->bind('LaravelGenerator', function ($app) {
-//            return new LaravelGenerator($app);
-//        });
-    }
-
-
     public function loadZezont4Components()
     {
         \Form::component('mtText', 'zezont4.components.form.text', ['name', 'label', 'value' => null, 'attributes' => []]);
         \Form::component('mtTel', 'zezont4.components.form.tel', ['name', 'label', 'value' => null, 'attributes' => []]);
         \Form::component('mtPassword', 'zezont4.components.form.password', ['name', 'label', 'attributes' => []]);
+
+        \Form::component('mtDate', 'zezont4.components.form.date', ['name', 'label', 'value' => null, 'attributes' => []]);
 
         \Form::component('mtRadio', 'zezont4.components.form.radio', ['name', 'label', 'value' => null, 'values', 'attributes' => []]);
         \Form::component('mtCheck', 'zezont4.components.form.check', ['name', 'label', 'value' => null, 'values', 'attributes' => []]);

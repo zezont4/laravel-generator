@@ -27,7 +27,7 @@
                         @show
 
                         @yield('content')
-                        <script src = "https://code.jquery.com/jquery-1.12.2.js" integrity = "sha256-VUCyr0ZXB5VhBibo2DkTVhdspjmxUgxDGaLQx7qb7xY=" crossorigin = "anonymous"></script>
+                        <script src = "{{asset('zezont4/laravel_generator/js/jquery-1.12.2.min.js')}}"></script>
                         <script src = "{{asset('zezont4/laravel_generator/js/materialize.min.js')}}"></script>
 
                         @include('package_views::layouts.js_messages')

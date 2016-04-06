@@ -151,6 +151,10 @@ blockquote {
     border-right: 5px solid #ee6e73;
 }
 
+.chip i.material-icons {
+    float: left;
+}
+
 @media only screen and (min-width: 601px) {
 
     .row .col.offset-m1 {

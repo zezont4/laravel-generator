@@ -13,7 +13,7 @@
     <form method="post" action="/laravel_generator/make_pages">
         {{ csrf_field() }}
 
-        {{\Form::mtText('model_name','اسم المودل - Model Name',$model_name)}}
+        {{\Form::mtText('model_name','اسم المودل - Model Name',str_singular($model_name))}}
 
         {{\Form::mtText('table_label','عنوان الجدول - Table label',$table_label)}}
 
@@ -53,15 +53,16 @@
         'page_name'=>'sql.html'])
 
 
-    @if(!is_dir(app_path()."/Models"))
-        <?php mkdir(app_path() . "/Models");?>
+    @if(!is_dir(app_path(config('zlg.model_path'))))
+        <?php mkdir(app_path(config('zlg.model_path')));?>
     @endif
+
     @include('package_views::layouts.code',[
         'id'=>'model',
         'language'=>'php',
-        'description'=>"Copy to (app\\Models\\{$model_name}.php)",
+        'description'=>"Copy to (app\\".config('zlg.model_path')."{$model_name}.php)",
         'page_name'=>'model.html',
-        'write_to_path'=>"Models/{$model_name}" ])
+        'write_to_path'=>config('zlg.model_path')."{$model_name}" ])
 
     @include('package_views::layouts.code',[
         'id'=>'request',

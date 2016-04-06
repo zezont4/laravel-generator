@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App<code>model_path</code>;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -17,8 +17,13 @@ class <code>model_name</code> extends Model
 
     protected $primaryKey = '<code>primary_key</code>';
 
-    protected $fillable = [<code>selected_fields</code>];
+    protected $fillable = [
+        <code>selected_fields</code>
+    ];
 
+    protected $casts = [
+        <code>casts_array</code>
+    ];
 
     /*
     * my custom searchable fields that came from search form
