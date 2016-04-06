@@ -1,12 +1,12 @@
 <?php
 return [
 
-	'yes_no'             => [
+	'yes_no' => [
 		0 => 'لا',
 		1 => 'نعم',
 	],
 
-	'button'             => [
+	'button' => [
 		'save'            => 'حفظ',
 		/* inside create page*/
 		'create'          => 'إضافة',
@@ -24,7 +24,7 @@ return [
 		'search'          => 'بحث',
 	],
 
-	'title'              => [
+	'title' => [
 		/* these will show as a title in the header after page title like :Users / edit*/
 		'show' => 'عرض',
 		'new'  => 'جديد',
@@ -43,5 +43,12 @@ return [
 
 	/* If you want Models to be in a separate folder inside app*/
 	/* If you write a path , then put a trailing slash "/" at the end*/
-	'model_path'        => 'Models/'
+	'model_path'         => 'Models/',
+
+	'model_message' => [
+		'created'  => 'تمت الإضافة بنجاح',
+		'updated'  => 'تم التعديل بنجاح',
+		'deleted'  => 'تم الحذف بنجاح',
+		'restored' => 'تمت الإستعادة بنجاح',
+	],
 ];

@@ -78,6 +78,7 @@
                                 <option value="select">Select</option>
                                 <option value="radio" {{$field->Type=='tinyint(1)'? 'selected':''}}>Radio</option>
                                 <option value="checkbox">Checkbox</option>
+                                <option value="date" {{ str_contains(strtolower($field->Field),'date')? 'selected':''}}>date</option>
                             </select>
                         </td>
                         <td style="text-align: center">

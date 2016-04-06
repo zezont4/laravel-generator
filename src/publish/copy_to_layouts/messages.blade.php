@@ -6,9 +6,9 @@ $message_types = [
 ];
 
 $typeColorArray = [
-        'success' => 'green-text text-darken-2 green lighten-4',
-        'error'   => 'red-text text-darken-2 red lighten-4',
-        'info'    => 'blue-text text-darken-2 blue lighten-4'
+        'success' => 'green-text',
+        'error'   => 'red-text',
+        'info'    => 'blue-text'
 ];
 ?>
 
@@ -19,8 +19,8 @@ $typeColorArray = [
             <?php $message_type_without_digits = preg_replace('/\d+/', '', $message_type); ?>
 
             <div class="chip {{ $typeColorArray[$message_type_without_digits] }}">
-                {{  Session::get($message_type) }}
-                <i class="material-icons">close</i>
+                <i class="material-icons alert text-lighten-1">check_circle</i>
+                {!! Session::get($message_type) !!}
             </div>
 
         @endif
@@ -31,9 +31,9 @@ $typeColorArray = [
 @if(count($errors->all()))
     <div class="row">
         @foreach($errors->all() as  $error)
-            <div class="chip red-text text-darken-2 red lighten-4">
+            <div class="chip red-text">
+                <i class="material-icons alert text-lighten-1">cancel</i>
                 {!! $error !!}
-                <i class="material-icons">close</i>
             </div>
         @endforeach
     </div>

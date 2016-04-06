@@ -10,21 +10,21 @@ trait FlashMessageAfterSaving
         parent::boot();
 
         static::created(function () {
-            Session::flash('success', 'تمت الإضافة بنجاح');
+            Session::flash("success", config('zlg.model_message.created'));
         });
 
         if (method_exists('restored', 'read')) {
             static::restored(function () {
-                Session::flash('success', 'تمت الإستعادة بنجاح');
+                Session::flash('success', config('zlg.model_message.restored'));
             });
         }
 
         static::updated(function () {
-            Session::flash('success', 'تم التعديل بنجاح');
+            Session::flash('success', config('zlg.model_message.updated'));
         });
 
         static::deleted(function () {
-            Session::flash('success', 'تم الحذف بنجاح');
+            Session::flash('success', config('zlg.model_message.deleted'));
         });
     }
 }

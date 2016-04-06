@@ -23,6 +23,10 @@
 -if field is set to be unique in database the a **unique** validation will be set.
 -if type of field is int the a **numeric** validation will be set.
 
+#### You can configure the models path and messages and buttons labels by changing them in (config/zlg.php) file.
+
+#### You can customize fields template by changing them in (resources/views/zezont4/components/form).
+
 #### For security , It only works if *APP_ENV=local* in .env file.
 
 ## Installation

@@ -438,7 +438,7 @@ input[type=text] + label:after, input[type=password] + label:after, input[type=e
     position: initial;
     padding-right: 8px;
     font-family: "Droid Arabic Naskh", sans-serif;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 select.browser-default {
@@ -457,6 +457,11 @@ input[type=text][readonly="readonly"][zezo_date="true"] {
 
 input[type=text][readonly="readonly"][zezo_date="true"] + label {
     color: #6B6B6B;
+}
+
+tr.deleted td {
+    text-decoration: line-through;
+    color: #999;
 }
 
 .navbar-fixed-force {
@@ -609,6 +614,18 @@ a.button-collapse.top-nav {
 
 nav .nav-wrapper a.page-title {
     font-size: 30px;
+}
+
+i.material-icons.alert {
+    float: right;
+    padding-left: 5px;
+    padding-right: 0;
+    font-size: 34px;
+    margin-right: -13px;
+}
+
+.chip {
+    font-size: 16px;
 }
 
 @media only screen and (max-width: 992px) {
