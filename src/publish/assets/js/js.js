@@ -6,6 +6,9 @@ $(document).ready(function () {
         }
     );
 
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $('.modal-trigger').leanModal();
+
     /* to work around right aligned side nav */
     document.getElementById("nav-mobile").removeAttribute('style');
     document.getElementById("nav-mobile").style["width"] = "240px";

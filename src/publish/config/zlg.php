@@ -35,7 +35,7 @@ return [
 	'message'            => [
 		'this_record_is_deleted' => 'هذا السجل محذوف',
 		/* message in the index page if there is no records*/
-		'no_result'              => 'لا توجد بيانات',
+		'no_results'              => 'لا توجد بيانات',
 	],
 
 	/* <select placeholder="">*/
@@ -51,4 +51,7 @@ return [
 		'deleted'  => 'تم الحذف بنجاح',
 		'restored' => 'تمت الإستعادة بنجاح',
 	],
+
+	/* the sorting arrow in the header of index table*/
+	'sorting_arrow' => '<i class="material-icons right grey-text text-darken-1">arrow_drop_up</i>',
 ];

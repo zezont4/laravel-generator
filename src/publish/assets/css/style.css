@@ -451,7 +451,7 @@ select.browser-default {
 
 input[type=text][readonly="readonly"][zezo_date="true"] {
     color: #555;
-    font-size: 17px;
+    font-size: 16px;
     border-bottom: 1px solid #999;
 }
 
@@ -626,8 +626,11 @@ i.material-icons.alert {
 
 .chip {
     font-size: 16px;
+    margin: 2px 0;
 }
-
+th a i.right {
+    margin-left: 0;
+}
 @media only screen and (max-width: 992px) {
     nav .nav-wrapper a.page-title {
         font-size: 24px;

@@ -10,6 +10,7 @@ $materialize_create = generateMaterializeCreatePage($model_name, $table_label);
 $materialize_edit = generateMaterializeEditPage($model_name, $table_label, session('primary_key'));
 $materialize_index = generateMaterializeIndexPage($model_name, $table_label, session('primary_key'));
 $materialize_search = generateMaterializeSearchPage($model_name, $table_label);
+$materialize_embedded_search = generateMaterializeEmbeddedSearchPage($model_name, $table_label);
 ?>
 
 <div class="row remove-margin-bottom">
@@ -29,6 +30,8 @@ $materialize_search = generateMaterializeSearchPage($model_name, $table_label);
                 @include('package_views::layouts.write_view_to_file',['text_content'=>$materialize_show])
             @elseif($page == 'search')
                 @include('package_views::layouts.write_view_to_file',['text_content'=>$materialize_search])
+            @elseif($page == '_search')
+                @include('package_views::layouts.write_view_to_file',['text_content'=>$materialize_embedded_search])
             @elseif($page == 'index')
                 @include('package_views::layouts.write_view_to_file',['text_content'=>$materialize_index])
             @endif
@@ -64,6 +67,8 @@ $materialize_search = generateMaterializeSearchPage($model_name, $table_label);
                 {{$materialize_show}}
             @elseif($page == 'search')
                 {{$materialize_search}}
+            @elseif($page == '_search')
+                {{$materialize_embedded_search}}
             @elseif($page == 'index')
                 {{$materialize_index}}
             @endif

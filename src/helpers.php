@@ -159,11 +159,11 @@ if (!function_exists('generateMaterializeFormPage')) {
                 $type = $field['type'];
                 if ($type == 'text') {
 
-                    $htmlCode .= "{{ \\Form::mtText('{$field["name"]}','{$field["label"]}' ) }}\n\n";
+                    $htmlCode .= "{{ \\Form::mtText('{$field["name"]}','{$field["label"]}' ,request('{$field["name"]}',  null)) }}\n\n";
 
                 } elseif ($type == 'date') {
 
-                    $htmlCode .= "{{ \\Form::mtDate('{$field["name"]}','{$field["label"]}' ) }}\n\n";
+                    $htmlCode .= "{{ \\Form::mtDate('{$field["name"]}','{$field["label"]}' ,request('{$field["name"]}',  null)) }}\n\n";
 
                 } elseif ($type == 'password') {
 
@@ -171,15 +171,15 @@ if (!function_exists('generateMaterializeFormPage')) {
 
                 } elseif ($type == 'select') {
 
-                    $htmlCode .= "{{ \\Form::mtSelect('{$field["name"]}','{$field["label"]}',null,yes_no() ) }}\n\n";
+                    $htmlCode .= "{{ \\Form::mtSelect('{$field["name"]}','{$field["label"]}',request('{$field["name"]}',  null),yes_no() ) }}\n\n";
 
                 } elseif ($type == 'radio') {
 
-                    $htmlCode .= "{{ \\Form::mtRadio('{$field["name"]}','{$field["label"]}',null,yes_no() ) }}\n\n";
+                    $htmlCode .= "{{ \\Form::mtRadio('{$field["name"]}','{$field["label"]}',request('{$field["name"]}',  null),yes_no() ) }}\n\n";
 
                 } elseif ($type == 'checkbox') {
 
-                    $htmlCode .= "{{ \\Form::mtCheck('{$field["name"]}','{$field["label"]}',null,yes_no() ) }}\n\n";
+                    $htmlCode .= "{{ \\Form::mtCheck('{$field["name"]}','{$field["label"]}',request('{$field["name"]}',  null),yes_no() ) }}\n\n";
 
                 }
             }
@@ -207,7 +207,7 @@ if (!function_exists('generateMaterializeCreatePage')) {
 
     {{ \\Form::open(['route' => '" . $lower_model_name . ".store']) }}
 
-    @include('" . $lower_model_name . "._form',['btnLabel' => '" . config('zlg.button.create') . "','formType' => 'create'])
+    @include('" . $lower_model_name . "._form',['btnLabel' => '" . config('zlg.button.save') . "','formType' => 'create'])
 
     {{ \\Form::close() }}
 
@@ -235,7 +235,7 @@ if (!function_exists('generateMaterializeEditPage')) {
     @endif
     {{ \\Form::model($" . $lower_model_name . ", ['route' => ['" . $lower_model_name . ".update', $" . $lower_model_name . "->" . $primary_key . "], 'method' => 'put']) }}
 
-    @include('" . $lower_model_name . "._form',['btnLabel' => '" . config('zlg.button.edit') . "','formType' => 'update'])
+    @include('" . $lower_model_name . "._form',['btnLabel' => '" . config('zlg.button.save') . "','formType' => 'update'])
 
     {{ \\Form::close() }}
 
@@ -262,17 +262,18 @@ if (!function_exists('generateMaterializeIndexPage')) {
 @extends('layouts.master')
 @section('title','$page_title')
 @section('content')
-<a href='{{route(\"" . $lower_model_name . ".create\")}}' class='btn waves-effect waves-light blue'>" . config('zlg.button.new') . "<i class=\"material-icons left\">add</i></a>
-<a href='{{route(\"" . $lower_model_name . ".search\")}}' class='btn waves-effect waves-light left blue'>" . config('zlg.button.advanced_search') . "<i class=\"material-icons left\">search</i></a>
+<a href='{{route('{$lower_model_name}.create')}}' class='btn waves-effect waves-light blue'>" . config('zlg.button.new') . "<i class='material-icons left'>add</i></a>
+<a href='#search_modal' class='btn waves-effect waves-light left blue modal-trigger'>" . config('zlg.button.advanced_search') . "<i class='material-icons left'>search</i></a>
+@include('student._search')
 @if(count($" . $lower_model_name . "s))
-
+<?php \$arrow = config('zlg.sorting_arrow');?>
  <table class='highlight responsive-table'>
     <thead>
         <tr>
 ";
         foreach (session('fields_array') as $field) {
             if ($field['is_selected']) {
-                $htmlCode .= "\t\t<th><a href=\"{{route('" . $lower_model_name . ".index', \Request::except('sort') + ['sort' => '" . $field['name'] . "']  ) }}\">{$field['label']}</a></th>\n";
+                $htmlCode .= "\t\t<th><a href=\"{{route('" . $lower_model_name . ".index', request()->except('sort') + ['sort' => '" . $field['name'] . "']  ) }}\">{!! request('sort')=='{$field['name']}' ? \$arrow : ''!!}{$field['label']}</a></th>\n";
             }
         }
         $htmlCode .= "
@@ -280,27 +281,6 @@ if (!function_exists('generateMaterializeIndexPage')) {
         </tr>
 
         </thead>
-        <tr class='hide-on-print-only'>
-{{ Form::open(['route' => '" . $lower_model_name . ".index', 'method' => 'get']) }}
-    ";
-
-        foreach (session('fields_array') as $field) {
-            if ($field['is_selected']) {
-                if ($field['type'] == 'text') {
-                    $htmlCode .= "\t\t<td>{{ \\Form::text('{$field['name']}',request('{$field["name"]}', \$default = null))}}</td>\n";
-                } elseif ($field['type'] == 'radio' || $field['type'] == 'check') {
-                    $htmlCode .= "\t\t<td>{{ \\Form::select('{$field['name']}',yes_no(),request('{$field["name"]}', \$default = null),['placeholder' => '" . config('zlg.select_placeholder') . "','class'=>'browser-default'])}}</td>\n";
-                } elseif ($field['type'] != 'text') {
-                    $htmlCode .= "\t\t<td>&nbsp;</td>\n";
-                }
-            }
-        }
-
-        $htmlCode .= "
-        <td><input type='submit'  value='  " . config('zlg.button.search') . "  ' class='btn no-padding blue' /></td>
-        {{ Form::close() }}
-        </tr>
-
         ";
 
         $htmlCode .= "@foreach($" . $lower_model_name . "s as $" . $lower_model_name . ")
@@ -322,7 +302,7 @@ if (!function_exists('generateMaterializeIndexPage')) {
     @endforeach
 </table>
     <div class='section'>
-        {{ $" . $lower_model_name . "s->appends(\Request::query())->render() }}
+        {{ $" . $lower_model_name . "s->appends(request()->query())->render() }}
     </div>
 
     @else
@@ -361,4 +341,28 @@ if (!function_exists('generateMaterializeSearchPage')) {
 
         return $htmlCode;
     }
+}
+
+if (!function_exists('generateMaterializeEmbeddedSearchPage')) {
+	function generateMaterializeEmbeddedSearchPage($model_name, $page_title)
+	{
+		$lower_model_name = strtolower($model_name);
+
+		$htmlCode = "
+<div id='search_modal' class='modal modal-fixed-footer'>
+    <div class='modal-content'>
+		<div class='section'>
+			{{ Form::open(['route' => '" . $lower_model_name . ".index', 'method' => 'get']) }}
+
+			@include('" . $lower_model_name . "._form',['btnLabel' => '" . config('zlg.button.search') . "','formType' => 'search'])
+
+			{{ Form::close() }}
+		</div>
+	</div>
+</div>
+";
+
+
+		return $htmlCode;
+	}
 }

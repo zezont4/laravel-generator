@@ -40,8 +40,8 @@ class LaravelGeneratorController extends Controller
 
 	public function makePages(Request $request)
 	{
-		$table_name = $request->has('table_name') ? $request->table_name : session('table_name');
-		session()->put('table_name', $table_name);
+		$table_name = session('table_name');
+//		session()->put('table_name', $table_name);
 
 		$model_name = $request->has('model_name') ? $request->model_name : ucfirst($table_name);
 		session()->put('model_name', $model_name);
