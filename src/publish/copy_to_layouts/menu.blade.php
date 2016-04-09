@@ -1,15 +1,10 @@
 <nav class="top-nav">
     <div class="container">
         <div class="nav-wrapper">
-            <a class="page-title">
-                <div class="nav-wrapper">
-                    <div class="col s12">
-                        <a href="#!" class="breadcrumb">First</a>
-                        @yield('title')
-                    </div>
-                </div>
-
-            </a>
+            <div class="col s12">
+                @yield('parent')
+                <a class="page-title"> @yield('title') </a>
+            </div>
         </div>
     </div>
 </nav>

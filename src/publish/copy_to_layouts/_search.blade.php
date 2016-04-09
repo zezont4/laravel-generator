@@ -17,9 +17,9 @@
 <div id='search_modal' class='modal modal-fixed-footer'>
     <div class='modal-content'>
         <div class='section'>
-            {{ Form::open(['route' => 'student.index', 'method' => 'get']) }}
+            {{ Form::open(['route' => strtolower($model).'.index', 'method' => 'get']) }}
 
-            @include('student._form',['btnLabel' => 'بحث','formType' => 'search'])
+            @include(strtolower($model).'._form',['btnLabel' => 'بحث','formType' => 'search'])
 
             {{ Form::close() }}
         </div>

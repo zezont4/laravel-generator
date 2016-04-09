@@ -127,7 +127,7 @@ if (!function_exists('generateMaterializeShowPage')) {
 		$htmlCode = "
 @extends('layouts.master')
 
-@section('parent','<a href=\"'.route(\"{$lower_model_name}.index\").'\" class=\"breadcrumb\">$page_title</a>')
+@section('parent','<a href=\"'.route(\"{$lower_model_name}.index\").'\" class=\"breadcrumb page-title\">$page_title</a>')
 @section('title','" . config('zlg.title.show','show') . "')
 
 @section('content')
@@ -213,7 +213,7 @@ if (!function_exists('generateMaterializeCreatePage')) {
 		$htmlCode = "
 @extends('layouts.master')
 
-@section('parent','<a href=\"'.route(\"{$lower_model_name}.index\").'\" class=\"breadcrumb\">$page_title</a>')
+@section('parent','<a href=\"'.route(\"{$lower_model_name}.index\").'\" class=\"breadcrumb page-title\">$page_title</a>')
 @section('title','" . config('zlg.title.create','create') . "')
 
 @section('content')
@@ -238,7 +238,7 @@ if (!function_exists('generateMaterializeEditPage')) {
 		$htmlCode = "
 @extends('layouts.master')
 
-@section('parent','<a href=\"'.route(\"{$lower_model_name}.index\").'\" class=\"breadcrumb\">$page_title</a>')
+@section('parent','<a href=\"'.route(\"{$lower_model_name}.index\").'\" class=\"breadcrumb page-title\">$page_title</a>')
 @section('title','" . config('zlg.title.edit','edit') . "')
 
 @section('content')
@@ -341,7 +341,7 @@ if (!function_exists('generateMaterializeSearchPage')) {
 		$htmlCode = "
 @extends('layouts.master')
 
-@section('parent','<a href=\"'.route(\"{$lower_model_name}.index\").'\" class=\"breadcrumb\">$page_title</a>')
+@section('parent','<a href=\"'.route(\"{$lower_model_name}.index\").'\" class=\"breadcrumb page-title\">$page_title</a>')
 @section('title','" . config('zlg.title.search'.'Search') . "')
 
 @section('content')
