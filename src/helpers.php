@@ -16,8 +16,8 @@ if (!function_exists('yse_no')) {
 	function yes_no($value = null)
 	{
 		$yes_no = [
-			0 => 'لا',
 			1 => 'نعم',
+			0 => 'لا',
 		];
 
 		if (!is_null($value)) {
