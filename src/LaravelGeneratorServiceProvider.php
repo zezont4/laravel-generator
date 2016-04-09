@@ -63,9 +63,9 @@ class LaravelGeneratorServiceProvider extends ServiceProvider
 
 		\Form::component('mtDate', 'zezont4.components.form.date', ['name', 'label', 'value' => null, 'attributes' => []]);
 
-		\Form::component('mtRadio', 'zezont4.components.form.radio', ['name', 'label', 'value' => null, 'values', 'attributes' => []]);
-		\Form::component('mtCheck', 'zezont4.components.form.check', ['name', 'label', 'value' => null, 'values', 'attributes' => []]);
-		\Form::component('mtSelect', 'zezont4.components.form.select', ['name', 'label', 'value' => null, 'values', 'attributes' => []]);
+		\Form::component('mtRadio', 'zezont4.components.form.radio', ['name', 'label', 'selected_value' => null, 'values', 'attributes' => []]);
+		\Form::component('mtCheck', 'zezont4.components.form.check', ['name', 'label', 'selected_value' => null, 'values', 'attributes' => []]);
+		\Form::component('mtSelect', 'zezont4.components.form.select', ['name', 'label', 'selected_value' => null, 'values', 'attributes' => []]);
 
 		\Form::component('mtButton', 'zezont4.components.form.button', ['label', 'class' => 'waves-light btn']);
 
