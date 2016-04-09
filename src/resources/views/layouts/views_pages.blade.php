@@ -10,7 +10,7 @@ $materialize_create = generateMaterializeCreatePage($model_name, $table_label);
 $materialize_edit = generateMaterializeEditPage($model_name, $table_label, session('primary_key'));
 $materialize_index = generateMaterializeIndexPage($model_name, $table_label, session('primary_key'));
 $materialize_search = generateMaterializeSearchPage($model_name, $table_label);
-$materialize_embedded_search = generateMaterializeEmbeddedSearchPage($model_name, $table_label);
+//$materialize_embedded_search = generateMaterializeEmbeddedSearchPage($model_name, $table_label);
 ?>
 
 <div class="row remove-margin-bottom">
@@ -19,7 +19,7 @@ $materialize_embedded_search = generateMaterializeEmbeddedSearchPage($model_name
         <button class="btn waves-effect waves-light blue lighten-2"
                 onclick="selectElementContents(document.getElementById('{{$page}}_code'))">تحديد الكود
         </button>
-        @if(\Request::has('_token'))
+        @if(request()->has('_token'))
             @if($page == 'create')
                 @include('package_views::layouts.write_view_to_file',['text_content'=>$materialize_create])
             @elseif($page == '_form')
@@ -31,7 +31,7 @@ $materialize_embedded_search = generateMaterializeEmbeddedSearchPage($model_name
             @elseif($page == 'search')
                 @include('package_views::layouts.write_view_to_file',['text_content'=>$materialize_search])
             @elseif($page == '_search')
-                @include('package_views::layouts.write_view_to_file',['text_content'=>$materialize_embedded_search])
+{{--                @include('package_views::layouts.write_view_to_file',['text_content'=>$materialize_embedded_search])--}}
             @elseif($page == 'index')
                 @include('package_views::layouts.write_view_to_file',['text_content'=>$materialize_index])
             @endif
@@ -68,7 +68,7 @@ $materialize_embedded_search = generateMaterializeEmbeddedSearchPage($model_name
             @elseif($page == 'search')
                 {{$materialize_search}}
             @elseif($page == '_search')
-                {{$materialize_embedded_search}}
+{{--                {{$materialize_embedded_search}}--}}
             @elseif($page == 'index')
                 {{$materialize_index}}
             @endif

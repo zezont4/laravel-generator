@@ -27,9 +27,9 @@ return [
 	'title' => [
 		/* these will show as a title in the header after page title like :Users / edit*/
 		'show' => 'عرض',
-		'new'  => 'جديد',
+		'create'  => 'جديد',
 		'edit' => 'تعديل',
-
+		'search' => 'بحث',
 	],
 
 	'message'            => [
@@ -54,4 +54,7 @@ return [
 
 	/* the sorting arrow in the header of index table*/
 	'sorting_arrow' => '<i class="material-icons right grey-text text-darken-1">arrow_drop_up</i>',
+
+	/* Date format in validations */
+	'date_format' => 'Y/m/d'
 ];

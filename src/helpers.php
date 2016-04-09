@@ -37,7 +37,7 @@ if (!function_exists('generateLanguagePage')) {
 	{
 		$required_fields = '';
 		foreach (session('fields_array') as $field) {
-			if ($field['is_selected'] && $field['is_required']) {
+			if ($field['is_selected']) {
 				$required_fields .= "'" . $field['name'] . "'   =>  '" . $field['label'] . "',\n\t\t";
 			}
 		}
@@ -68,10 +68,9 @@ if (!function_exists('required_fields')) {
 		foreach (session('fields_array') as $field) {
 			if ($field['is_selected'] && $field['is_required']) {
 				$number = str_contains(strtolower($field['data_type']), 'int') ? '|numeric' : '';
-//				unique:table name,column,except value,idColumn*/
-				/*'national_id' => "unique:students,national_id,updated_id,id"*/
 				$unique = $field['key'] == 'UNI' ? '|unique:' . session('table_name') . ',' . $field['name'] . ',\'.@$this->route()->id.\',' . session('primary_key') : '';
-				$required_fields .= "'" . $field['name'] . "'   =>  'required{$number}{$unique}',\n\t\t";
+				$my_date_format = str_contains(strtolower($field['name']), 'date') ? '|date_format:"\'.config("zlg.date_format","Y/m/d").\'"' : '';
+				$required_fields .= "'" . $field['name'] . "'   =>  'required{$number}{$unique}{$my_date_format}',\n\t\t";
 			}
 		}
 
@@ -101,7 +100,7 @@ if (!function_exists('convertTemplateVariables')) {
 		$content = file_get_contents(__DIR__ . "/pages-template/{$page_name}");
 		$prefix = '<code>';
 		$suffix = '</code>';
-		$model_path = config('zlg.model_path') ? '\\' . rtrim(config('zlg.model_path'), '/') : '';
+		$model_path = config('zlg.model_path','Models/') ? '\\' . rtrim(config('zlg.model_path','Models/'), '/') : '';
 		$replace_with = [
 			$prefix . 'lower_case_model_name' . $suffix => strtolower(session('model_name')),
 			$prefix . 'model_name' . $suffix            => session('model_name'),
@@ -128,11 +127,12 @@ if (!function_exists('generateMaterializeShowPage')) {
 		$htmlCode = "
 @extends('layouts.master')
 
-@section('title',' " . $page_title . " / " . config('zlg.title.show') . "')
+@section('parent','<a href=\"'.route(\"{$lower_model_name}.index\").'\" class=\"breadcrumb\">$page_title</a>')
+@section('title','" . config('zlg.title.show','show') . "')
 
 @section('content')
 	<div class='row'>
-		<a href='{{route(\"" . $lower_model_name . ".create\")}}' class='btn waves-effect waves-light blue'>" . config('zlg.button.new') . "<i class=\"material-icons left\">add</i></a>
+		<a href='{{route(\"" . $lower_model_name . ".create\")}}' class='btn waves-effect waves-light blue'>" . config('zlg.button.new','new') . "<i class=\"material-icons left\">add</i></a>
 	</div>
 ";
 
@@ -153,7 +153,7 @@ if (!function_exists('generateMaterializeShowPage')) {
 		}
 		$htmlCode .= "
     <div class='section'>
-        <a class='waves-effect waves-light btn left red lighten-2' href='{{route('{$lower_model_name}.edit',$" . $lower_model_name . "->" . $primary_key . ")}}'>" . config('zlg.button.edit') . "</a>
+        <a class='waves-effect waves-light btn left red lighten-2' href='{{route('{$lower_model_name}.edit',$" . $lower_model_name . "->" . $primary_key . ")}}'>" . config('zlg.button.edit','edit') . "</a>
     </div>
 
 @stop";
@@ -213,13 +213,14 @@ if (!function_exists('generateMaterializeCreatePage')) {
 		$htmlCode = "
 @extends('layouts.master')
 
-@section('title',' " . $page_title . " / " . config("zlg.title.new") . "')
+@section('parent','<a href=\"'.route(\"{$lower_model_name}.index\").'\" class=\"breadcrumb\">$page_title</a>')
+@section('title','" . config('zlg.title.create','create') . "')
 
 @section('content')
 
     {{ \\Form::open(['route' => '" . $lower_model_name . ".store']) }}
 
-    @include('" . $lower_model_name . "._form',['btnLabel' => '" . config('zlg.button.save') . "','formType' => 'create'])
+    @include('" . $lower_model_name . "._form',['btnLabel' => '" . config('zlg.button.save','save') . "','formType' => 'create'])
 
     {{ \\Form::close() }}
 
@@ -237,7 +238,8 @@ if (!function_exists('generateMaterializeEditPage')) {
 		$htmlCode = "
 @extends('layouts.master')
 
-@section('title',' " . $page_title . " / " . config('zlg.title.edit') . "')
+@section('parent','<a href=\"'.route(\"{$lower_model_name}.index\").'\" class=\"breadcrumb\">$page_title</a>')
+@section('title','" . config('zlg.title.edit','edit') . "')
 
 @section('content')
 	@if($" . $lower_model_name . "->trashed())
@@ -247,17 +249,17 @@ if (!function_exists('generateMaterializeEditPage')) {
     @endif
     {{ \\Form::model($" . $lower_model_name . ", ['route' => ['" . $lower_model_name . ".update', $" . $lower_model_name . "->" . $primary_key . "], 'method' => 'put']) }}
 
-    @include('" . $lower_model_name . "._form',['btnLabel' => '" . config('zlg.button.save') . "','formType' => 'update'])
+    @include('" . $lower_model_name . "._form',['btnLabel' => '" . config('zlg.button.save','save') . "','formType' => 'update'])
 
     {{ \\Form::close() }}
 
     @if($" . $lower_model_name . "->trashed())
         {{ \\Form::open(['route' => ['" . $lower_model_name . ".restore', \$" . $lower_model_name . "->" . $primary_key . "]]) }}
-        {{ \\Form::mtButton('" . config('zlg.button.restore') . "', 'left btn-flat waves-green green-text') }}
+        {{ \\Form::mtButton('" . config('zlg.button.restore','restore') . "', 'left btn-flat waves-green green-text') }}
         {{ \\Form::close() }}
     @else
         {{ \\Form::open(['route' => ['" . $lower_model_name . ".destroy', \$" . $lower_model_name . "->" . $primary_key . "], 'method' => 'delete']) }}
-        {{ \\Form::mtButton('" . config('zlg.button.delete') . "', 'left btn-flat waves-red red-text') }}
+        {{ \\Form::mtButton('" . config('zlg.button.delete','delete') . "', 'left btn-flat waves-red red-text') }}
         {{ \\Form::close() }}
     @endif
 
@@ -275,12 +277,12 @@ if (!function_exists('generateMaterializeIndexPage')) {
 @section('title','$page_title')
 @section('content')
 <div class='row col s12'>
-	<a href='{{route('{$lower_model_name}.create')}}' class='btn waves-effect waves-light blue'>" . config('zlg.button.new') . "<i class='material-icons left'>add</i></a>
-	<a href='#search_modal' class='btn waves-effect waves-light left blue modal-trigger'>" . config('zlg.button.advanced_search') . "<i class='material-icons left'>search</i></a>
+	<a href='{{route('{$lower_model_name}.create')}}' class='btn waves-effect waves-light blue'>" . config('zlg.button.new','new') . "<i class='material-icons left'>add</i></a>
+	<a href='#search_modal' class='btn waves-effect waves-light left blue modal-trigger'>" . config('zlg.button.advanced_search','advanced search') . "<i class='material-icons left'>search</i></a>
 </div>
-@include('student._search')
+@include('layouts._search',['model'=>'{$model_name}'])
 @if(count($" . $lower_model_name . "s))
-<?php \$arrow = config('zlg.sorting_arrow');?>
+<?php \$arrow = config('zlg.sorting_arrow','<i class=\"material-icons right grey-text text-darken-1\">arrow_drop_up</i>');?>
  <table class='highlight responsive-table'>
     <thead>
         <tr>
@@ -311,7 +313,7 @@ if (!function_exists('generateMaterializeIndexPage')) {
 			}
 		}
 		$htmlCode .= "
-    \t<td><a title='" . config('zlg.button.edit') . "' href=\"{{ route('" . $lower_model_name . ".edit',  ['id' => $" . $lower_model_name . "->" . $primary_key . "] ) }}\"><i class=\"material-icons\">edit</i></a></td>
+    \t<td><a title='" . config('zlg.button.edit','edit') . "' href=\"{{ route('" . $lower_model_name . ".edit',  ['id' => $" . $lower_model_name . "->" . $primary_key . "] ) }}\"><i class=\"material-icons\">edit</i></a></td>
     <tr>
     @endforeach
 </table>
@@ -321,7 +323,7 @@ if (!function_exists('generateMaterializeIndexPage')) {
 
     @else
         <div class='center-align blue-text lighten-2'>
-            <h3>" . config('zlg.message.no_results') . "</h3>
+            <h4>" . config('zlg.message.no_results','No results found') . "</h4>
         </div>
 
 @endif
@@ -339,15 +341,14 @@ if (!function_exists('generateMaterializeSearchPage')) {
 		$htmlCode = "
 @extends('layouts.master')
 
-@section('title','$page_title " . " / " . config('zlg.button.search') . "')
-
-{{--@section('container_style','max-width: 602px;')--}}
+@section('parent','<a href=\"'.route(\"{$lower_model_name}.index\").'\" class=\"breadcrumb\">$page_title</a>')
+@section('title','" . config('zlg.title.search'.'Search') . "')
 
 @section('content')
 
     {{ Form::open(['route' => '" . $lower_model_name . ".index', 'method' => 'get']) }}
 
-    @include('" . $lower_model_name . "._form',['btnLabel' => '" . config('zlg.button.search') . "','formType' => 'search'])
+    @include('" . $lower_model_name . "._form',['btnLabel' => '" . config('zlg.button.search','Search') . "','formType' => 'search'])
 
     {{ Form::close() }}
 
@@ -357,21 +358,21 @@ if (!function_exists('generateMaterializeSearchPage')) {
 	}
 }
 
-if (!function_exists('generateMaterializeEmbeddedSearchPage')) {
-	function generateMaterializeEmbeddedSearchPage($model_name)
+if (!function_exists('generateMaterializeEmbeddedSearchPage1')) {
+	function generateMaterializeEmbeddedSearchPage1($model_name)
 	{
 		$lower_model_name = strtolower($model_name);
 
 		$htmlCode = "
 <?php \$add_container = true; ?>
 @foreach(\\Illuminate\\Support\\Facades\\Input::all() as \$param => \$value)
-    @if(\$value && in_array(\$param,(new \\App\\".str_replace('/','\\',config('zlg.model_path')).$model_name.")->searchableFields))
+    @if(\$value && in_array(\$param,(new \\App\\".str_replace('/','\\',config('zlg.model_path','Models/')).$model_name.")->searchableFields))
         @if(\$add_container)
             {!! '<div class=\"row col s12\">' !!}
             <h5 class='title-font grey-text darken-1'>عرض النتائج حسب التالي : </h5>
             <?php \$add_container = false; ?>
         @endif
-        <div class='chip'><span class='title-font'>{{trans('validation.attributes.'.\$param)}}</span> : {{\$value}}</div>
+        <div class='chip'><span class='title-font'>{{myTrans(\$param)}}</span> : {{\$value}}</div>
 
     @endif
 @endforeach
@@ -384,7 +385,7 @@ if (!function_exists('generateMaterializeEmbeddedSearchPage')) {
 		<div class='section'>
 			{{ Form::open(['route' => '" . $lower_model_name . ".index', 'method' => 'get']) }}
 
-			@include('" . $lower_model_name . "._form',['btnLabel' => '" . config('zlg.button.search') . "','formType' => 'search'])
+			@include('" . $lower_model_name . "._form',['btnLabel' => '" . config('zlg.button.search','Search') . "','formType' => 'search'])
 
 			{{ Form::close() }}
 		</div>
