@@ -11,8 +11,8 @@ trait SearchFormHelper
 	{
 		return $query->where(function ($query) {
             foreach ($this->searchableFields as $searchableField) {
-                $fieldValue = Request::get($searchableField, null);
-                if ($fieldValue) {
+                $fieldValue = request()->get($searchableField, null);
+                if ($fieldValue!=null) {
                     $query->where($searchableField, 'LIKE', "%$fieldValue%");
                 }
             }
