@@ -36,6 +36,10 @@ return [
 		'this_record_is_deleted' => 'هذا السجل محذوف',
 		/* message in the index page if there is no records*/
 		'no_results'              => 'لا توجد بيانات',
+
+		/*Message in edit or show page if the id is not found*/
+		'no_result'              => 'عفوا ... لقد وصلت إلى هذه الصفحة بطريقة غير صحيحة ؟',
+
 	],
 
 	/* <select placeholder="">*/

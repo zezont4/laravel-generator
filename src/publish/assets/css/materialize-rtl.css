@@ -19,6 +19,7 @@ body {
 .row .radio_rapper .title-font {
     color: #6B6B6B;
     padding-bottom: 5px;
+    margin-top: 0;
 }
 
 [type="radio"] + label:before, [type="radio"] + label:after {

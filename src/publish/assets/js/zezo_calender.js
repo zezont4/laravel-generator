@@ -950,9 +950,9 @@ var today_month = hijri_date.substring(4, 6);
 var today_year = hijri_date.substring(0, 4);
 /*make the UI only one time*/
 make_ui();
-/*create event handlers
- load_click_events();
- /*make text field read only*/
+/*create event handlers*/
+load_click_events();
+/*make text field read only*/
 var dateInput = $('input[zezo_date=true]');
 
 dateInput.attr('readonly', 'readonly');

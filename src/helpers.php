@@ -134,6 +134,8 @@ if (!function_exists('generateMaterializeShowPage')) {
 	<div class='row'>
 		<a href='{{route(\"" . $lower_model_name . ".create\")}}' class='btn waves-effect waves-light blue'>" . config('zlg.button.new','new') . "<i class=\"material-icons left\">add</i></a>
 	</div>
+
+	@if(count($" . $lower_model_name . "))
 ";
 
 		foreach (session('fields_array') as $field) {
@@ -141,17 +143,19 @@ if (!function_exists('generateMaterializeShowPage')) {
 				$type = $field['type'];
 				if ($type == 'select' || $type == 'radio' || $type == 'checkbox') {
 
-					$htmlCode .= "{{ \\Form::mtStatic(MyTrans('{$field['name']}'), yes_no(\$$lower_model_name->{$field['name']})  ) }}\n\n\t";
+					$htmlCode .= "{{ \\Form::mtStatic(MyTrans('{$field['name']}'), yes_no(\$$lower_model_name->{$field['name']})  ) }}\n\t";
 
 				} else {
 
-					$htmlCode .= "{{ \\Form::mtStatic(MyTrans('{$field['name']}'), \$$lower_model_name->{$field['name']}  ) }}\n\n\t";
+					$htmlCode .= "{{ \\Form::mtStatic(MyTrans('{$field['name']}'), \$$lower_model_name->{$field['name']}  ) }}\n\t";
 
 				}
 
 			}
 		}
 		$htmlCode .= "
+		@endif
+
     <div class='section'>
         <a class='waves-effect waves-light btn left red lighten-2' href='{{route('{$lower_model_name}.edit',$" . $lower_model_name . "->" . $primary_key . ")}}'>" . config('zlg.button.edit','edit') . "</a>
     </div>
@@ -242,25 +246,28 @@ if (!function_exists('generateMaterializeEditPage')) {
 @section('title','" . config('zlg.title.edit','edit') . "')
 
 @section('content')
-	@if($" . $lower_model_name . "->trashed())
-        <div class='section'>
-            <p class='red-text lighten-2 mid-size-font center-align'>هذا السجل محذوف</p>
-        </div>
-    @endif
-    {{ \\Form::model($" . $lower_model_name . ", ['route' => ['" . $lower_model_name . ".update', $" . $lower_model_name . "->" . $primary_key . "], 'method' => 'put']) }}
+	@if(count($" . $lower_model_name . "))
+		@if($" . $lower_model_name . "->trashed())
+			<div class='section'>
+				<p class='red-text lighten-2 mid-size-font center-align'>هذا السجل محذوف</p>
+			</div>
+		@endif
+		{{ \\Form::model($" . $lower_model_name . ", ['route' => ['" . $lower_model_name . ".update', $" . $lower_model_name . "->" . $primary_key . "], 'method' => 'put']) }}
 
-    @include('" . $lower_model_name . "._form',['btnLabel' => '" . config('zlg.button.save','save') . "','formType' => 'update'])
+		@include('" . $lower_model_name . "._form',['btnLabel' => '" . config('zlg.button.save','save') . "','formType' => 'update'])
 
-    {{ \\Form::close() }}
+		{{ \\Form::close() }}
 
-    @if($" . $lower_model_name . "->trashed())
-        {{ \\Form::open(['route' => ['" . $lower_model_name . ".restore', \$" . $lower_model_name . "->" . $primary_key . "]]) }}
-        {{ \\Form::mtButton('" . config('zlg.button.restore','restore') . "', 'left btn-flat waves-green green-text') }}
-        {{ \\Form::close() }}
-    @else
-        {{ \\Form::open(['route' => ['" . $lower_model_name . ".destroy', \$" . $lower_model_name . "->" . $primary_key . "], 'method' => 'delete']) }}
-        {{ \\Form::mtButton('" . config('zlg.button.delete','delete') . "', 'left btn-flat waves-red red-text') }}
-        {{ \\Form::close() }}
+		@if($" . $lower_model_name . "->trashed())
+			{{ \\Form::open(['route' => ['" . $lower_model_name . ".restore', \$" . $lower_model_name . "->" . $primary_key . "]]) }}
+			{{ \\Form::mtButton('" . config('zlg.button.restore','restore') . "', 'left btn-flat waves-green green-text') }}
+			{{ \\Form::close() }}
+		@else
+			{{ \\Form::open(['route' => ['" . $lower_model_name . ".destroy', \$" . $lower_model_name . "->" . $primary_key . "], 'method' => 'delete']) }}
+			{{ \\Form::mtButton('" . config('zlg.button.delete','delete') . "', 'left btn-flat waves-red red-text') }}
+			{{ \\Form::close() }}
+		@endif
+
     @endif
 
 @stop";
