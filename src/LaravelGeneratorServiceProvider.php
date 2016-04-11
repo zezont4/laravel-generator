@@ -26,7 +26,7 @@ class LaravelGeneratorServiceProvider extends ServiceProvider
 		], 'config');
 
 		$this->publishes([
-			__DIR__ . '/publish/assets' => public_path('copy_to_public'),
+			__DIR__ . '/publish/assets/' => public_path('copy_to_public'),
 		], 'assets');
 
 		$this->publishes([
