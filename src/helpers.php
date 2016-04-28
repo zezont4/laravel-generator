@@ -5,7 +5,7 @@ if (!function_exists('myTrans')) {
 	{
 		$trans1 = trans('validation.attributes.' . $field_name);
 		if (str_contains($trans1, '.')) {
-			return ucwords(str_replace("_", " ",$field_name));
+			return ucwords(str_replace("_", " ", $field_name));
 		}
 
 		return $trans1;
@@ -100,7 +100,7 @@ if (!function_exists('convertTemplateVariables')) {
 		$content = file_get_contents(__DIR__ . "/pages-template/{$page_name}");
 		$prefix = '<code>';
 		$suffix = '</code>';
-		$model_path = config('zlg.model_path','Models/') ? '\\' . rtrim(config('zlg.model_path','Models/'), '/') : '';
+		$model_path = config('zlg.model_path', 'Models/') ? '\\' . rtrim(config('zlg.model_path', 'Models/'), '/') : '';
 		$replace_with = [
 			$prefix . 'lower_case_model_name' . $suffix => strtolower(session('model_name')),
 			$prefix . 'model_name' . $suffix            => session('model_name'),
@@ -128,11 +128,11 @@ if (!function_exists('generateMaterializeShowPage')) {
 @extends('layouts.master')
 
 @section('parent','<a href=\"'.route(\"{$lower_model_name}.index\").'\" class=\"breadcrumb page-title\">$page_title</a>')
-@section('title','" . config('zlg.title.show','show') . "')
+@section('title','" . config('zlg.title.show', 'show') . "')
 
 @section('content')
 	<div class='row'>
-		<a href='{{route(\"" . $lower_model_name . ".create\")}}' class='btn waves-effect waves-light blue'>" . config('zlg.button.new','new') . "<i class=\"material-icons left\">add</i></a>
+		<a href='{{route(\"" . $lower_model_name . ".create\")}}' class='btn waves-effect waves-light blue'>" . config('zlg.button.new', 'new') . "<i class=\"material-icons left\">add</i></a>
 	</div>
 
 	@if(count($" . $lower_model_name . "))
@@ -157,7 +157,7 @@ if (!function_exists('generateMaterializeShowPage')) {
 		@endif
 
     <div class='section'>
-        <a class='waves-effect waves-light btn left red lighten-2' href='{{route('{$lower_model_name}.edit',$" . $lower_model_name . "->" . $primary_key . ")}}'>" . config('zlg.button.edit','edit') . "</a>
+        <a class='waves-effect waves-light btn left red lighten-2' href='{{route('{$lower_model_name}.edit',$" . $lower_model_name . "->" . $primary_key . ")}}'>" . config('zlg.button.edit', 'edit') . "</a>
     </div>
 
 @stop";
@@ -173,29 +173,31 @@ if (!function_exists('generateMaterializeFormPage')) {
 		foreach (session('fields_array') as $field) {
 			if ($field['is_selected']) {
 				$type = $field['type'];
+				$required = $field['is_required'] ? '["required"=>true]' : '[]';
+
 				if ($type == 'text') {
 
-					$htmlCode .= "{{ \\Form::mtText('{$field["name"]}',MyTrans('{$field['name']}') ,request('{$field["name"]}',  null)) }}\n\n";
+					$htmlCode .= "{{ \\Form::mtText('{$field["name"]}',MyTrans('{$field['name']}') ,request('{$field["name"]}',  null), $required) }}\n\n";
 
 				} elseif ($type == 'date') {
 
-					$htmlCode .= "{{ \\Form::mtDate('{$field["name"]}',MyTrans('{$field['name']}') ,request('{$field["name"]}',  null)) }}\n\n";
+					$htmlCode .= "{{ \\Form::mtDate('{$field["name"]}',MyTrans('{$field['name']}') ,request('{$field["name"]}',  null),$required) }}\n\n";
 
 				} elseif ($type == 'password') {
 
-					$htmlCode .= "{{ \\Form::mtPassword('{$field["name"]}',MyTrans('{$field['name']}') ) }}\n\n";
+					$htmlCode .= "{{ \\Form::mtPassword('{$field["name"]}',MyTrans('{$field['name']}',null),$required ) }}\n\n";
 
 				} elseif ($type == 'select') {
 
-					$htmlCode .= "{{ \\Form::mtSelect('{$field["name"]}',MyTrans('{$field['name']}'),request('{$field["name"]}',  null),yes_no() ) }}\n\n";
+					$htmlCode .= "{{ \\Form::mtSelect('{$field["name"]}',MyTrans('{$field['name']}'),request('{$field["name"]}',  null),yes_no(),$required ) }}\n\n";
 
 				} elseif ($type == 'radio') {
 
-					$htmlCode .= "{{ \\Form::mtRadio('{$field["name"]}',MyTrans('{$field['name']}'),request('{$field["name"]}',  null),yes_no() ) }}\n\n";
+					$htmlCode .= "{{ \\Form::mtRadio('{$field["name"]}',MyTrans('{$field['name']}'),request('{$field["name"]}',  null),yes_no(),$required ) }}\n\n";
 
 				} elseif ($type == 'checkbox') {
 
-					$htmlCode .= "{{ \\Form::mtCheck('{$field["name"]}',MyTrans('{$field['name']}'),request('{$field["name"]}',  null),yes_no() ) }}\n\n";
+					$htmlCode .= "{{ \\Form::mtCheck('{$field["name"]}',MyTrans('{$field['name']}'),request('{$field["name"]}',  null),yes_no(),$required ) }}\n\n";
 
 				}
 			}
@@ -218,13 +220,13 @@ if (!function_exists('generateMaterializeCreatePage')) {
 @extends('layouts.master')
 
 @section('parent','<a href=\"'.route(\"{$lower_model_name}.index\").'\" class=\"breadcrumb page-title\">$page_title</a>')
-@section('title','" . config('zlg.title.create','create') . "')
+@section('title','" . config('zlg.title.create', 'create') . "')
 
 @section('content')
 
     {{ \\Form::open(['route' => '" . $lower_model_name . ".store']) }}
 
-    @include('" . $lower_model_name . "._form',['btnLabel' => '" . config('zlg.button.save','save') . "','formType' => 'create'])
+    @include('" . $lower_model_name . "._form',['btnLabel' => '" . config('zlg.button.save', 'save') . "','formType' => 'create'])
 
     {{ \\Form::close() }}
 
@@ -243,7 +245,7 @@ if (!function_exists('generateMaterializeEditPage')) {
 @extends('layouts.master')
 
 @section('parent','<a href=\"'.route(\"{$lower_model_name}.index\").'\" class=\"breadcrumb page-title\">$page_title</a>')
-@section('title','" . config('zlg.title.edit','edit') . "')
+@section('title','" . config('zlg.title.edit', 'edit') . "')
 
 @section('content')
 	@if(count($" . $lower_model_name . "))
@@ -254,17 +256,17 @@ if (!function_exists('generateMaterializeEditPage')) {
 		@endif
 		{{ \\Form::model($" . $lower_model_name . ", ['route' => ['" . $lower_model_name . ".update', $" . $lower_model_name . "->" . $primary_key . "], 'method' => 'put']) }}
 
-		@include('" . $lower_model_name . "._form',['btnLabel' => '" . config('zlg.button.save','save') . "','formType' => 'update'])
+		@include('" . $lower_model_name . "._form',['btnLabel' => '" . config('zlg.button.save', 'save') . "','formType' => 'update'])
 
 		{{ \\Form::close() }}
 
 		@if($" . $lower_model_name . "->trashed())
 			{{ \\Form::open(['route' => ['" . $lower_model_name . ".restore', \$" . $lower_model_name . "->" . $primary_key . "]]) }}
-			{{ \\Form::mtButton('" . config('zlg.button.restore','restore') . "', 'left btn-flat waves-green green-text') }}
+			{{ \\Form::mtButton('" . config('zlg.button.restore', 'restore') . "', 'left btn-flat waves-green green-text') }}
 			{{ \\Form::close() }}
 		@else
 			{{ \\Form::open(['route' => ['" . $lower_model_name . ".destroy', \$" . $lower_model_name . "->" . $primary_key . "], 'method' => 'delete']) }}
-			{{ \\Form::mtButton('" . config('zlg.button.delete','delete') . "', 'left btn-flat waves-red red-text') }}
+			{{ \\Form::mtButton('" . config('zlg.button.delete', 'delete') . "', 'left btn-flat waves-red red-text') }}
 			{{ \\Form::close() }}
 		@endif
 
@@ -284,8 +286,8 @@ if (!function_exists('generateMaterializeIndexPage')) {
 @section('title','$page_title')
 @section('content')
 <div class='row col s12'>
-	<a href='{{route('{$lower_model_name}.create')}}' class='btn waves-effect waves-light blue'>" . config('zlg.button.new','new') . "<i class='material-icons left'>add</i></a>
-	<a href='#search_modal' class='btn waves-effect waves-light left blue modal-trigger'>" . config('zlg.button.advanced_search','advanced search') . "<i class='material-icons left'>search</i></a>
+	<a href='{{route('{$lower_model_name}.create')}}' class='btn waves-effect waves-light blue'>" . config('zlg.button.new', 'new') . "<i class='material-icons left'>add</i></a>
+	<a href='#search_modal' class='btn waves-effect waves-light left blue modal-trigger'>" . config('zlg.button.advanced_search', 'advanced search') . "<i class='material-icons left'>search</i></a>
 </div>
 @include('layouts._search',['model'=>'{$model_name}'])
 @if(count($" . $lower_model_name . "s))
@@ -320,7 +322,7 @@ if (!function_exists('generateMaterializeIndexPage')) {
 			}
 		}
 		$htmlCode .= "
-    \t<td><a title='" . config('zlg.button.edit','edit') . "' href=\"{{ route('" . $lower_model_name . ".edit',  ['id' => $" . $lower_model_name . "->" . $primary_key . "] ) }}\"><i class=\"material-icons\">edit</i></a></td>
+    \t<td><a title='" . config('zlg.button.edit', 'edit') . "' href=\"{{ route('" . $lower_model_name . ".edit',  ['id' => $" . $lower_model_name . "->" . $primary_key . "] ) }}\"><i class=\"material-icons\">edit</i></a></td>
     <tr>
     @endforeach
 </table>
@@ -330,7 +332,7 @@ if (!function_exists('generateMaterializeIndexPage')) {
 
     @else
         <div class='center-align blue-text lighten-2'>
-            <h4>" . config('zlg.message.no_results','No results found') . "</h4>
+            <h4>" . config('zlg.message.no_results', 'No results found') . "</h4>
         </div>
 
 @endif
@@ -349,13 +351,13 @@ if (!function_exists('generateMaterializeSearchPage')) {
 @extends('layouts.master')
 
 @section('parent','<a href=\"'.route(\"{$lower_model_name}.index\").'\" class=\"breadcrumb page-title\">$page_title</a>')
-@section('title','" . config('zlg.title.search'.'Search') . "')
+@section('title','" . config('zlg.title.search' . 'Search') . "')
 
 @section('content')
 
     {{ Form::open(['route' => '" . $lower_model_name . ".index', 'method' => 'get']) }}
 
-    @include('" . $lower_model_name . "._form',['btnLabel' => '" . config('zlg.button.search','Search') . "','formType' => 'search'])
+    @include('" . $lower_model_name . "._form',['btnLabel' => '" . config('zlg.button.search', 'Search') . "','formType' => 'search'])
 
     {{ Form::close() }}
 
@@ -373,7 +375,7 @@ if (!function_exists('generateMaterializeEmbeddedSearchPage1')) {
 		$htmlCode = "
 <?php \$add_container = true; ?>
 @foreach(\\Illuminate\\Support\\Facades\\Input::all() as \$param => \$value)
-    @if(\$value && in_array(\$param,(new \\App\\".str_replace('/','\\',config('zlg.model_path','Models/')).$model_name.")->searchableFields))
+    @if(\$value && in_array(\$param,(new \\App\\" . str_replace('/', '\\', config('zlg.model_path', 'Models/')) . $model_name . ")->searchableFields))
         @if(\$add_container)
             {!! '<div class=\"row col s12\">' !!}
             <h5 class='title-font grey-text darken-1'>عرض النتائج حسب التالي : </h5>
@@ -392,7 +394,7 @@ if (!function_exists('generateMaterializeEmbeddedSearchPage1')) {
 		<div class='section'>
 			{{ Form::open(['route' => '" . $lower_model_name . ".index', 'method' => 'get']) }}
 
-			@include('" . $lower_model_name . "._form',['btnLabel' => '" . config('zlg.button.search','Search') . "','formType' => 'search'])
+			@include('" . $lower_model_name . "._form',['btnLabel' => '" . config('zlg.button.search', 'Search') . "','formType' => 'search'])
 
 			{{ Form::close() }}
 		</div>
