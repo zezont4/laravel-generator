@@ -97,7 +97,7 @@
         <a href="/{{strtolower($model_name)}}s">Visit {{$model_name}} index page</a>
     @endif
 
-    @include('package_views::layouts.views_pages',['page'=>'_search'])
+{{--    @include('package_views::layouts.views_pages',['page'=>'_search'])--}}
 
     @include('package_views::layouts.views_pages',['page'=>'search'])
     @if(file_exists(base_path()."/resources/views/".strtolower($model_name)."/search.blade.php"))

@@ -6,7 +6,20 @@
             <h5 class='title-font grey-text darken-1'>عرض النتائج حسب التالي : </h5>
             <?php $add_container = false; ?>
         @endif
-        <div class='chip'><span class='title-font'>{{myTrans($param)}}</span> : {{$value}}</div>
+        <div class='chip'>
+            <span class='title-font'>{{myTrans($param)}}</span>
+            :
+            {{--Get value from the comtroller values array if it exists or echo the naked value --}}
+            @if(isset($my_values))
+                @if(array_key_exists($param,$my_values))
+                    {{$my_values[$param][$value]}}
+                @else
+                    {{$value}}
+                @endif
+            @else
+                {{$value}}
+            @endif
+        </div>
 
     @endif
 @endforeach

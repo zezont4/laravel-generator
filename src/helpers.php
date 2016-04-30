@@ -143,7 +143,7 @@ if (!function_exists('generateMaterializeShowPage')) {
 				$type = $field['type'];
 				if ($type == 'select' || $type == 'radio' || $type == 'checkbox') {
 
-					$htmlCode .= "{{ \\Form::mtStatic(MyTrans('{$field['name']}'), yes_no(\$$lower_model_name->{$field['name']})  ) }}\n\t";
+					$htmlCode .= "{{ \\Form::mtStatic(MyTrans('{$field['name']}'), \$my_values['yes_no'][\$$lower_model_name->{$field['name']}]  ) }}\n\t";
 
 				} else {
 
@@ -189,15 +189,15 @@ if (!function_exists('generateMaterializeFormPage')) {
 
 				} elseif ($type == 'select') {
 
-					$htmlCode .= "{{ \\Form::mtSelect('{$field["name"]}',MyTrans('{$field['name']}'),request('{$field["name"]}',  null),yes_no(),$required ) }}\n\n";
+					$htmlCode .= "{{ \\Form::mtSelect('{$field["name"]}',MyTrans('{$field['name']}'),request('{$field["name"]}',  null),\$my_values['yes_no'],$required ) }}\n\n";
 
 				} elseif ($type == 'radio') {
 
-					$htmlCode .= "{{ \\Form::mtRadio('{$field["name"]}',MyTrans('{$field['name']}'),request('{$field["name"]}',  null),yes_no(),$required ) }}\n\n";
+					$htmlCode .= "{{ \\Form::mtRadio('{$field["name"]}',MyTrans('{$field['name']}'),request('{$field["name"]}',  null),\$my_values['yes_no'],$required ) }}\n\n";
 
 				} elseif ($type == 'checkbox') {
 
-					$htmlCode .= "{{ \\Form::mtCheck('{$field["name"]}',MyTrans('{$field['name']}'),request('{$field["name"]}',  null),yes_no(),$required ) }}\n\n";
+					$htmlCode .= "{{ \\Form::mtCheck('{$field["name"]}',MyTrans('{$field['name']}'),request('{$field["name"]}',  null),\$my_values['yes_no'],$required ) }}\n\n";
 
 				}
 			}
@@ -315,7 +315,7 @@ if (!function_exists('generateMaterializeIndexPage')) {
 			$type = $field['type'];
 			if ($field['is_selected']) {
 				if ($type == 'select' || $type == 'radio' || $type == 'checkbox') {
-					$htmlCode .= "\t\t<td>{{  yes_no($" . $lower_model_name . "->" . $field['name'] . ") }}</td>\n";
+					$htmlCode .= "\t\t<td>{{  \$my_values['yes_no'][$" . $lower_model_name . "->" . $field['name'] . "] }}</td>\n";
 				} else {
 					$htmlCode .= "\t\t<td>{{ $" . $lower_model_name . "->" . $field['name'] . "  }}</td>\n";
 				}

@@ -10,6 +10,12 @@ use App\Models\<code>model_name</code>;
 class <code>model_name</code>Controller extends Controller
 {
 
+    public $my_values = [
+        'yes_no' => [
+            1 => 'نعم',
+            0 => 'لا',
+        ],
+    ]
     public function __construct()
     {
         //$this->middleware('auth');
@@ -18,7 +24,7 @@ class <code>model_name</code>Controller extends Controller
 
     public function search()
     {
-        return View('<code>lower_case_model_name</code>.search');
+        return View('<code>lower_case_model_name</code>.search')->with(['my_values' => $this->my_values]);
     }
 
     public function index()
@@ -29,12 +35,12 @@ class <code>model_name</code>Controller extends Controller
 
         $<code>lower_case_model_name</code>s = <code>model_name</code>::withTrashed()->search()->sort()->paginate();
 
-        return View('<code>lower_case_model_name</code>.index', compact('<code>lower_case_model_name</code>s'));
+        return View('<code>lower_case_model_name</code>.index')->with(['<code>lower_case_model_name</code>s' => $<code>lower_case_model_name</code>s,'my_values' => $this->my_values]);
     }
 
     public function create()
     {
-        return View('<code>lower_case_model_name</code>.create');
+        return View('<code>lower_case_model_name</code>.create')->with(['my_values' => $this->my_values]);
     }
 
     public function store(<code>model_name</code>Request $request)
@@ -48,14 +54,14 @@ class <code>model_name</code>Controller extends Controller
     {
         $<code>lower_case_model_name</code> = <code>model_name</code>::withTrashed()->findOrFail($id);
 
-        return View('<code>lower_case_model_name</code>.show', compact('<code>lower_case_model_name</code>'));
+        return View('<code>lower_case_model_name</code>.show')->with(['<code>lower_case_model_name</code>' => $<code>lower_case_model_name</code>,'my_values' => $this->my_values]);
     }
 
     public function edit($id)
     {
         $<code>lower_case_model_name</code> = <code>model_name</code>::withTrashed()->findOrFail($id);
 
-        return View('<code>lower_case_model_name</code>.edit', compact('<code>lower_case_model_name</code>'));
+        return View('<code>lower_case_model_name</code>.edit')->with(['<code>lower_case_model_name</code>' => $<code>lower_case_model_name</code>,'my_values' => $this->my_values]);
     }
 
     public function update($id, Requests\<code>model_name</code>Request $request)
