@@ -9,7 +9,7 @@
         <div class='chip'>
             <span class='title-font'>{{myTrans($param)}}</span>
             :
-            {{--Get value from the comtroller values array if it exists or echo the naked value --}}
+            {{--Get value from the controller values array if it exists or echo the naked value --}}
             @if(isset($my_values))
                 @if(array_key_exists($param,$my_values))
                     {{$my_values[$param][$value]}}
