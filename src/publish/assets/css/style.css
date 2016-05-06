@@ -744,7 +744,7 @@ th a i.right {
 .show-on-print-only {
     display: none
 }
-
+.required::before {content: "*";padding-left: 5px;float: right;line-height: 10px;color: red;=: right}
 @media print {
     .container {
         padding: 0;

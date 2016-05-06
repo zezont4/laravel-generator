@@ -173,7 +173,8 @@ if (!function_exists('generateMaterializeFormPage')) {
 		foreach (session('fields_array') as $field) {
 			if ($field['is_selected']) {
 				$type = $field['type'];
-				$required = $field['is_required'] ? '["required"=>true]' : '[]';
+//				$required = $field['is_required'] ? '["required"=>true]' : '[]';
+				$required = $field['is_required'] ? '["is_required"=>true]' : '[]';
 
 				if ($type == 'text') {
 

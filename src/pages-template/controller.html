@@ -31,9 +31,9 @@ class <code>model_name</code>Controller extends Controller
 
     {
         // DB::row is used to fix order by full_name
-        //$<code>lower_case_model_name</code>s = <code>model_name</code>::withTrashed()->search()->sort()->select('*', \DB::raw('CONCAT_WS(" ", name1, name2, name3, name4) AS full_name'))->paginate();
+        //$<code>lower_case_model_name</code>s = <code>model_name</code>::withTrashed()->search()->sort()->select('*', \DB::raw('CONCAT_WS(" ", name1, name2, name3, name4) AS full_name'))->paginate(100);
 
-        $<code>lower_case_model_name</code>s = <code>model_name</code>::withTrashed()->search()->sort()->paginate();
+        $<code>lower_case_model_name</code>s = <code>model_name</code>::withTrashed()->search()->sort()->paginate(100);
 
         return View('<code>lower_case_model_name</code>.index')->with(['<code>lower_case_model_name</code>s' => $<code>lower_case_model_name</code>s,'my_values' => $this->my_values]);
     }
