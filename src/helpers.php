@@ -12,6 +12,17 @@ if (!function_exists('myTrans')) {
 	}
 }
 
+if (!function_exists('arrayValue')) {
+	function arrayValue($array, $selected_value)
+	{
+		if (is_array($array)) {
+			if (array_key_exists($selected_value,$array)) {
+				return $array[$selected_value];
+			}
+		}
+	}
+}
+
 if (!function_exists('yse_no')) {
 	function yes_no($value = null)
 	{
@@ -143,7 +154,7 @@ if (!function_exists('generateMaterializeShowPage')) {
 				$type = $field['type'];
 				if ($type == 'select' || $type == 'radio' || $type == 'checkbox') {
 
-					$htmlCode .= "{{ \\Form::mtStatic(MyTrans('{$field['name']}'), \$my_values['yes_no'][\$$lower_model_name->{$field['name']}]  ) }}\n\t";
+					$htmlCode .= "{{ \\Form::mtStatic(MyTrans('{$field['name']}'), arrayValue(\$my_values['{$field['name']}'],\$$lower_model_name->{$field['name']})  ) }}\n\t";
 
 				} else {
 
@@ -316,7 +327,7 @@ if (!function_exists('generateMaterializeIndexPage')) {
 			$type = $field['type'];
 			if ($field['is_selected']) {
 				if ($type == 'select' || $type == 'radio' || $type == 'checkbox') {
-					$htmlCode .= "\t\t<td>{{  \$my_values['yes_no'][$" . $lower_model_name . "->" . $field['name'] . "] }}</td>\n";
+					$htmlCode .= "\t\t<td>{{ arrayValue(\$my_values['".$field['name']."'],$" . $lower_model_name . "->" . $field['name'] . ") }}</td>\n";
 				} else {
 					$htmlCode .= "\t\t<td>{{ $" . $lower_model_name . "->" . $field['name'] . "  }}</td>\n";
 				}
