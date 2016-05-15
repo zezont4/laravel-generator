@@ -23,7 +23,7 @@ trait SearchFormHelper
     {
         $sort = Request::get('sort', null);
 
-        return $sort ? $query->orderBy('deleted_at')->orderBy($sort) : $query->orderBy('deleted_at');
+        return $sort ? $query->orderBy('deleted_at')->orderBy($sort) : $query->orderBy('deleted_at')->orderBy('id');
 
     }
 }
