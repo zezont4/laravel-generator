@@ -4,7 +4,7 @@
         @foreach ($values as $key => $value)
             <span>
                 {{ \Form::radio($name, $key, $key===$selected_value ? true : false,array_merge($attributes,['id'=>$name.$key]))}}
-                {{ \Form::label($name.$key, $value) }}
+                {{ \Form::label($key, $value) }}
             </span>
         @endforeach
     </div>
