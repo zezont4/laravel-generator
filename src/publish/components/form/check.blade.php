@@ -4,7 +4,7 @@
         @foreach ($values as $key => $value)
             <span>
                 {{ \Form::CheckBox($name, $key, $key===$selected_value ? true : false,array_merge($attributes,['id'=>$name.$key]))}}
-                {{ \Form::label($key, $value) }}
+                {{ \Form::label($name.$key, $value.' ') }}
             </span>
         @endforeach
     </div>
