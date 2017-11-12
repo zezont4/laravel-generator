@@ -92,8 +92,5 @@ class LaravelGeneratorServiceProvider extends ServiceProvider
         \Blade::directive('endhasPermission', function () {
             return "<?php endif; endif; ?>";
         });
-
     }
-
 }
-
