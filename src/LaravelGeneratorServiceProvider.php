@@ -77,7 +77,7 @@ class LaravelGeneratorServiceProvider extends ServiceProvider
 	{
 		\Blade::directive('hasRole', function ($role_slug) {
 			return "<?php if (auth()->check()) :
-				if (auth()->user()->hasRole{$role_slug}) : ?>";
+				if (auth()->user()->hasRole({$role_slug})) : ?>";
 		});
 
 		\Blade::directive('endhasRole', function () {
@@ -86,7 +86,7 @@ class LaravelGeneratorServiceProvider extends ServiceProvider
 
         \Blade::directive('hasPermission', function ($permission_slug) {
             return "<?php if (auth()->check()) :
-				if (auth()->user()->allowedTo{$permission_slug}) : ?>";
+				if (auth()->user()->allowedTo({$permission_slug})) : ?>";
         });
 
         \Blade::directive('endhasPermission', function () {
