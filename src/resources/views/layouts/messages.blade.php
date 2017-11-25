@@ -22,14 +22,17 @@ $msgs = array_merge($danger, $warning, $success, $info);
 --}}
 
 {{--رسائل الخطأ--}}
-
-@if(count($errors->all()))
-    <div class="section">
-        @foreach($errors->all() as  $error)
-            <p class="red-text text-lighten-2"> {!!$error!!} </p>
-        @endforeach
-    </div>
-    <div class="divider"></div>
+@if(isset($errors))
+    @if(method_exists($errors, 'all'))
+        @if(count($errors->all()))
+            <div class="section">
+                @foreach($errors->all() as  $error)
+                    <p class="red-text text-lighten-2"> {!!$error!!} </p>
+                @endforeach
+            </div>
+            <div class="divider"></div>
+        @endif
+    @endif
 @endif
 
 {{--Flash messages--}}
