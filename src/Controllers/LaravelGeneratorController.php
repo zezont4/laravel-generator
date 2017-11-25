@@ -43,10 +43,10 @@ class LaravelGeneratorController extends Controller
 		$table_name = session('table_name');
 //		session()->put('table_name', $table_name);
 
-		$model_name = $request->has('model_name') ? $request->model_name : ucfirst($table_name);
+		$model_name = $request->filled('model_name') ? $request->model_name : ucfirst($table_name);
 		session()->put('model_name', $model_name);
 
-		$table_label = $request->has('table_label') ? $request->table_label : ucfirst($table_name);
+		$table_label = $request->filled('table_label') ? $request->table_label : ucfirst($table_name);
 
 		$fields_array = [];
 		if (session()->has('fields')) {
