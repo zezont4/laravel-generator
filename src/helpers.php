@@ -296,7 +296,7 @@ if (!\function_exists('generateMaterializeIndexPage')) {
 ";
         foreach (session('fields_array') as $field) {
             if ($field['is_selected']) {
-                $htmlCode .= "\t\t@include('layouts._th',['model'=>'${lower_model_name}','field'=> MyTrans('{$field['name']}')])\n";
+                $htmlCode .= "\t\t@include('layouts._th',['model'=>'${lower_model_name}','field'=> '{$field['name']}'])\n";
             }
         }
         $htmlCode .= '
