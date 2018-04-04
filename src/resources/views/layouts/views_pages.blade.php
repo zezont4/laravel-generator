@@ -82,6 +82,6 @@ $materialize_search = generateMaterializeSearchPage($model_name, $table_label);
     @if($page == 'language')
         Copy to <strong>resources\lang\ar\validation.php</strong>
     @else
-        Copy to <strong>resources\views\{{strtolower($model_name)}}\{{$page}} .blade.php</strong>
+        Copy to <strong>resources\views\{{strtolower(snake_case($model_name))}}\{{$page}} .blade.php</strong>
     @endif
 </h6>

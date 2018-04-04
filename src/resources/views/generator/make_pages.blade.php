@@ -87,21 +87,21 @@
 
     @include('package_views::layouts.views_pages',['page'=>'create'])
     @if(file_exists(base_path()."/resources/views/".strtolower($model_name)."/create.blade.php"))
-        <a href="/{{strtolower($model_name)}}/create">Visit {{$model_name}} create page</a>
+        <a href="/{{strtolower($model_name)}}/create">Visit {{snake_case($model_name)}} create page</a>
     @endif
 
     @include('package_views::layouts.views_pages',['page'=>'edit'])
 
     @include('package_views::layouts.views_pages',['page'=>'index'])
     @if(file_exists(base_path()."/resources/views/".strtolower($model_name)."/index.blade.php"))
-        <a href="/{{strtolower($model_name)}}s">Visit {{$model_name}} index page</a>
+        <a href="/{{strtolower($model_name)}}s">Visit {{snake_case($model_name)}} index page</a>
     @endif
 
 {{--    @include('package_views::layouts.views_pages',['page'=>'_search'])--}}
 
     @include('package_views::layouts.views_pages',['page'=>'search'])
     @if(file_exists(base_path()."/resources/views/".strtolower($model_name)."/search.blade.php"))
-        <a href="/search/{{strtolower($model_name)}}">Visit {{$model_name}} search page</a>
+        <a href="/search/{{strtolower($model_name)}}">Visit {{snake_case($model_name)}} search page</a>
     @endif
 
 @stop
