@@ -16,11 +16,6 @@ class <code>model_name</code>Controller extends Controller
             0 => 'لا',
         ],
     ];
-    public function __construct()
-    {
-        //$this->middleware('auth');
-        //$this->middleware('acl');
-    }
 
     public function search()
     {
@@ -64,7 +59,7 @@ class <code>model_name</code>Controller extends Controller
         return View('<code>lower_case_model_name</code>.edit')->with(['<code>lower_case_model_name</code>' => $<code>lower_case_model_name</code>,'my_values' => $this->my_values]);
     }
 
-    public function update($id, Requests\<code>model_name</code>Request $request)
+    public function update($id, <code>model_name</code>Request $request)
     {
         $<code>lower_case_model_name</code> = <code>model_name</code>::withTrashed()->findOrFail($id);
 

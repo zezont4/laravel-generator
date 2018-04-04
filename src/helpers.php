@@ -133,7 +133,7 @@ if (!\function_exists('convertTemplateVariables')) {
 if (!\function_exists('generateMaterializeShowPage')) {
     function generateMaterializeShowPage($model_name, $page_title, $primary_key)
     {
-        $lower_model_name = \strtolower($model_name);
+        $lower_model_name = \strtolower(snake_case($model_name));
         $htmlCode         = "
 @extends('layouts.master')
 
@@ -178,7 +178,7 @@ if (!\function_exists('generateMaterializeFormPage')) {
         foreach (session('fields_array') as $field) {
             if ($field['is_selected']) {
                 $type = $field['type'];
-                //				$required = $field['is_required'] ? '["required"=>true]' : '[]';
+                //$required = $field['is_required'] ? '["required"=>true]' : '[]';
                 $required = $field['is_required'] ? '["is_required"=>true]' : '[]';
 
                 if ($type == 'text') {
@@ -208,7 +208,7 @@ if (!\function_exists('generateMaterializeFormPage')) {
 if (!\function_exists('generateMaterializeCreatePage')) {
     function generateMaterializeCreatePage($model_name, $page_title)
     {
-        $lower_model_name = \strtolower($model_name);
+        $lower_model_name = \strtolower(snake_case($model_name));
         $htmlCode         = "
 @extends('layouts.master')
 
@@ -234,7 +234,7 @@ if (!\function_exists('generateMaterializeCreatePage')) {
 if (!\function_exists('generateMaterializeEditPage')) {
     function generateMaterializeEditPage($model_name, $page_title, $primary_key)
     {
-        $lower_model_name = \strtolower($model_name);
+        $lower_model_name = \strtolower(snake_case($model_name));
 
         $htmlCode = "
 @extends('layouts.master')
@@ -278,7 +278,7 @@ if (!\function_exists('generateMaterializeEditPage')) {
 if (!\function_exists('generateMaterializeIndexPage')) {
     function generateMaterializeIndexPage($model_name, $page_title, $primary_key)
     {
-        $lower_model_name = \strtolower($model_name);
+        $lower_model_name = \strtolower(snake_case($model_name));
         $htmlCode         = "
 @extends('layouts.master')
 @section('title','${page_title}')
@@ -343,7 +343,7 @@ if (!\function_exists('generateMaterializeIndexPage')) {
 if (!\function_exists('generateMaterializeSearchPage')) {
     function generateMaterializeSearchPage($model_name, $page_title)
     {
-        $lower_model_name = \strtolower($model_name);
+        $lower_model_name = \strtolower(snake_case($model_name));
 
         $htmlCode = "
 @extends('layouts.master')
@@ -370,7 +370,7 @@ if (!\function_exists('generateMaterializeSearchPage')) {
 if (!\function_exists('generateMaterializeEmbeddedSearchPage1')) {
     function generateMaterializeEmbeddedSearchPage1($model_name)
     {
-        $lower_model_name = \strtolower($model_name);
+        $lower_model_name = \strtolower(snake_case($model_name));
 
         $htmlCode = '
 <?php $add_container = true; ?>
