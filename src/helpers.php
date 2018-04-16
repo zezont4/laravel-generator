@@ -313,9 +313,9 @@ if (!\function_exists('generateMaterializeIndexPage')) {
             $type = $field['type'];
             if ($field['is_selected']) {
                 if ($type == 'select' || $type == 'radio' || $type == 'checkbox') {
-                    $htmlCode .= "\t\t<td>{{ z_arrayValue(\$my_values['".$field['name']."'],$".$lower_model_name.'->'.$field['name'].") }}</td>\n";
+                    $htmlCode .= "\t\t<td data-label='{$field['name']}'>{{ z_arrayValue(\$my_values['".$field['name']."'],$".$lower_model_name.'->'.$field['name'].") }}</td>\n";
                 } else {
-                    $htmlCode .= "\t\t<td>{{ $".$lower_model_name.'->'.$field['name']."  }}</td>\n";
+                    $htmlCode .= "\t\t<td data-label='{$field['name']}'>{{ $".$lower_model_name.'->'.$field['name']."  }}</td>\n";
                 }
             }
         }
