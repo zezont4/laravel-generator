@@ -304,6 +304,7 @@ if (!\function_exists('generateMaterializeIndexPage')) {
         </tr>
 
         </thead>
+        <tbody>
         ';
 
         $htmlCode .= '@foreach($'.$lower_model_name.'s as $'.$lower_model_name.')
@@ -313,9 +314,9 @@ if (!\function_exists('generateMaterializeIndexPage')) {
             $type = $field['type'];
             if ($field['is_selected']) {
                 if ($type == 'select' || $type == 'radio' || $type == 'checkbox') {
-                    $htmlCode .= "\t\t<td data-label='{$field['name']}'>{{ z_arrayValue(\$my_values['".$field['name']."'],$".$lower_model_name.'->'.$field['name'].") }}</td>\n";
+                    $htmlCode .= "\t\t<td data-label=\"{{ MyTrans('{$field['name']}')}}\">{{ z_arrayValue(\$my_values['".$field['name']."'],$".$lower_model_name.'->'.$field['name'].") }}</td>\n";
                 } else {
-                    $htmlCode .= "\t\t<td data-label='{$field['name']}'>{{ $".$lower_model_name.'->'.$field['name']."  }}</td>\n";
+                    $htmlCode .= "\t\t<td data-label=\"{{ MyTrans('{$field['name']}')}}\">{{ $".$lower_model_name.'->'.$field['name']."  }}</td>\n";
                 }
             }
         }
@@ -323,6 +324,7 @@ if (!\function_exists('generateMaterializeIndexPage')) {
     \t<td><a title='".config('zlg.button.edit', 'edit')."' href=\"{{ route('".$lower_model_name.".edit',  ['id' => $".$lower_model_name.'->'.$primary_key."] ) }}\"><i class=\"material-icons\">edit</i></a></td>
     <tr>
     @endforeach
+    </tbody>
 </table>
     <div class='section'>
         {{ $".$lower_model_name."s->appends(request()->query())->render() }}
