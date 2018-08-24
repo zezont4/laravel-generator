@@ -290,7 +290,7 @@ if (!\function_exists('generateMaterializeIndexPage')) {
 @include('layouts._search',['model'=>'{$model_name}'])
 @if(count($".$lower_model_name."s))
 <?php \$arrow = config('zlg.sorting_arrow','<i class=\"material-icons right grey-text text-darken-1\">arrow_drop_up</i>');?>
- <table class='highlight responsive-table'>
+ <table class='highlight has-mobile-cards'>
     <thead>
         <tr>
 ";
