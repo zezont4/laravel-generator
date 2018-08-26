@@ -9,7 +9,7 @@ $materialize_form = generateMaterializeFormPage();
 $materialize_create = generateMaterializeCreatePage($model_name, $table_label);
 $materialize_edit = generateMaterializeEditPage($model_name, $table_label, session('primary_key'));
 $materialize_index = generateMaterializeIndexPage($model_name, $table_label, session('primary_key'));
-$materialize_search = generateMaterializeSearchPage($model_name, $table_label);
+//$materialize_search = generateMaterializeSearchPage($model_name, $table_label);
 //$materialize_embedded_search = generateMaterializeEmbeddedSearchPage($model_name, $table_label);
 ?>
 

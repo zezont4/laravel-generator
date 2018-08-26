@@ -342,33 +342,6 @@ if (!\function_exists('generateMaterializeIndexPage')) {
     }
 }
 
-if (!\function_exists('generateMaterializeSearchPage')) {
-    function generateMaterializeSearchPage($model_name, $page_title)
-    {
-        $lower_model_name = \strtolower(snake_case($model_name));
-
-        $htmlCode = "
-@extends('layouts.master')
-
-@section('parent')
-    <a href='{{route(\"${lower_model_name}.index\")}}' class='breadcrumb page-title'>${page_title}</a>
-@stop
-@section('title','".config('zlg.title.search'.'Search')."')
-
-@section('content')
-
-    {{ Form::open(['route' => '".$lower_model_name.".index', 'method' => 'get']) }}
-
-    @include('".$lower_model_name."._form',['btnLabel' => '".config('zlg.button.search', 'Search')."','formType' => 'search'])
-
-    {{ Form::close() }}
-
-@stop";
-
-        return $htmlCode;
-    }
-}
-
 if (!\function_exists('generateMaterializeEmbeddedSearchPage1')) {
     function generateMaterializeEmbeddedSearchPage1($model_name)
     {
