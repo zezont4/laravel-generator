@@ -342,8 +342,8 @@ if (!\function_exists('generateMaterializeIndexPage')) {
     }
 }
 
-if (!\function_exists('generateMaterializeEmbeddedSearchPage1')) {
-    function generateMaterializeEmbeddedSearchPage1($model_name)
+if (!\function_exists('generateMaterializeEmbeddedSearchPage')) {
+    function generateMaterializeEmbeddedSearchPage($model_name)
     {
         $lower_model_name = \strtolower(snake_case($model_name));
 
