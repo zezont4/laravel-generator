@@ -145,7 +145,7 @@ if (!\function_exists('generateMaterializeShowPage')) {
 		<a href='{{route(\"".$lower_model_name.".create\")}}' class='btn waves-effect waves-light blue'>".config('zlg.button.new', 'new').'<i class="material-icons left">add</i></a>
 	</div>
 
-	@if(count($'.$lower_model_name.'))
+	@if(count((array)$'.$lower_model_name.'))
 ';
 
         foreach (session('fields_array') as $field) {
@@ -245,7 +245,7 @@ if (!\function_exists('generateMaterializeEditPage')) {
 @section('title','".config('zlg.title.edit', 'edit')."')
 
 @section('content')
-	@if(count($".$lower_model_name.'))
+	@if(count((array)$".$lower_model_name.'))
 		@if($'.$lower_model_name."->trashed())
 			<div class='section'>
 				<p class='red-text lighten-2 mid-size-font center-align'>هذا السجل محذوف</p>
@@ -288,7 +288,7 @@ if (!\function_exists('generateMaterializeIndexPage')) {
 	<a href='#search_modal' class='btn waves-effect waves-light left blue modal-trigger'>".config('zlg.button.advanced_search', 'advanced search')."<i class='material-icons left'>search</i></a>
 </div>
 @include('layouts._search',['model'=>'{$model_name}'])
-@if(count($".$lower_model_name."s))
+@if(count((array)$".$lower_model_name."s))
 <?php \$arrow = config('zlg.sorting_arrow','<i class=\"material-icons right grey-text text-darken-1\">arrow_drop_up</i>');?>
  <table class='highlight has-mobile-cards'>
     <thead>
