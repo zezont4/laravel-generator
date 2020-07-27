@@ -2,7 +2,8 @@
 namespace Zezont4\LaravelGenerator;
 
 use Illuminate\Support\ServiceProvider;
-
+use \Form;
+use \Blade;
 class LaravelGeneratorServiceProvider extends ServiceProvider
 {
     public function register()
