@@ -65,10 +65,10 @@ $materialize_embedded_search = generateMaterializeEmbeddedSearchPage($model_name
                 {{$materialize_edit}}
             @elseif($page == 'show')
                 {{$materialize_show}}
+{{--            @elseif($page == 'search')--}}
+{{--                {{$materialize_search}}--}}
             @elseif($page == 'search')
-                {{$materialize_search}}
-            @elseif($page == '_search')
-{{--                {{$materialize_embedded_search}}--}}
+                {{$materialize_embedded_search}}
             @elseif($page == 'index')
                 {{$materialize_index}}
             @endif
