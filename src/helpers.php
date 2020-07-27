@@ -152,9 +152,9 @@ if (!\function_exists('generateMaterializeShowPage')) {
             if ($field['is_selected']) {
                 $type = $field['type'];
                 if ($type == 'select' || $type == 'radio' || $type == 'checkbox') {
-                    $htmlCode .= "{{ \\Form::mtStatic(MyTrans('{$field['name']}'), z_arrayValue(\$my_values['{$field['name']}'],\$${lower_model_name}->{$field['name']})  ) }}\n\t";
+                    $htmlCode .= "{{ Form::mtStatic(MyTrans('{$field['name']}'), z_arrayValue(\$my_values['{$field['name']}'],\$${lower_model_name}->{$field['name']})  ) }}\n\t";
                 } else {
-                    $htmlCode .= "{{ \\Form::mtStatic(MyTrans('{$field['name']}'), \$${lower_model_name}->{$field['name']}  ) }}\n\t";
+                    $htmlCode .= "{{ Form::mtStatic(MyTrans('{$field['name']}'), \$${lower_model_name}->{$field['name']}  ) }}\n\t";
                 }
             }
         }
@@ -182,23 +182,23 @@ if (!\function_exists('generateMaterializeFormPage')) {
                 $required = $field['is_required'] ? '["is_required"=>true]' : '[]';
 
                 if ($type == 'text') {
-                    $htmlCode .= "{{ \\Form::mtText('{$field['name']}',MyTrans('{$field['name']}') ,request('{$field['name']}',  null), ${required}) }}\n\n";
+                    $htmlCode .= "{{ Form::mtText('{$field['name']}',MyTrans('{$field['name']}') ,request('{$field['name']}',  null), ${required}) }}\n\n";
                 } elseif ($type == 'date') {
-                    $htmlCode .= "{{ \\Form::mtDate('{$field['name']}',MyTrans('{$field['name']}') ,request('{$field['name']}',  null),${required}) }}\n\n";
+                    $htmlCode .= "{{ Form::mtDate('{$field['name']}',MyTrans('{$field['name']}') ,request('{$field['name']}',  null),${required}) }}\n\n";
                 } elseif ($type == 'password') {
-                    $htmlCode .= "{{ \\Form::mtPassword('{$field['name']}',MyTrans('{$field['name']}',null),${required} ) }}\n\n";
+                    $htmlCode .= "{{ Form::mtPassword('{$field['name']}',MyTrans('{$field['name']}',null),${required} ) }}\n\n";
                 } elseif ($type == 'select') {
-                    $htmlCode .= "{{ \\Form::mtSelect('{$field['name']}',MyTrans('{$field['name']}'),request('{$field['name']}',  null),\$my_values['yes_no'],${required} ) }}\n\n";
+                    $htmlCode .= "{{ Form::mtSelect('{$field['name']}',MyTrans('{$field['name']}'),request('{$field['name']}',  null),\$my_values['yes_no'],${required} ) }}\n\n";
                 } elseif ($type == 'radio') {
-                    $htmlCode .= "{{ \\Form::mtRadio('{$field['name']}',MyTrans('{$field['name']}'),request('{$field['name']}',  null),\$my_values['yes_no'],${required} ) }}\n\n";
+                    $htmlCode .= "{{ Form::mtRadio('{$field['name']}',MyTrans('{$field['name']}'),request('{$field['name']}',  null),\$my_values['yes_no'],${required} ) }}\n\n";
                 } elseif ($type == 'checkbox') {
-                    $htmlCode .= "{{ \\Form::mtCheck('{$field['name']}',MyTrans('{$field['name']}'),request('{$field['name']}',  null),\$my_values['yes_no'],${required} ) }}\n\n";
+                    $htmlCode .= "{{ Form::mtCheck('{$field['name']}',MyTrans('{$field['name']}'),request('{$field['name']}',  null),\$my_values['yes_no'],${required} ) }}\n\n";
                 }
             }
         }
         $htmlCode .= "
 <div class='section'>
-     {{ \\Form::mtButton(\$btnLabel, 'left red lighten-2') }}
+     {{ Form::mtButton(\$btnLabel, 'left red lighten-2') }}
 </div>";
 
         return $htmlCode;
@@ -219,11 +219,11 @@ if (!\function_exists('generateMaterializeCreatePage')) {
 
 @section('content')
 
-    {{ \\Form::open(['route' => '".$lower_model_name.".store']) }}
+    {{ Form::open(['route' => '".$lower_model_name.".store']) }}
 
     @include('".$lower_model_name."._form',['btnLabel' => '".config('zlg.button.save', 'save')."','formType' => 'create'])
 
-    {{ \\Form::close() }}
+    {{ Form::close() }}
 
 @stop";
 
@@ -251,20 +251,20 @@ if (!\function_exists('generateMaterializeEditPage')) {
 				<p class='red-text lighten-2 mid-size-font center-align'>هذا السجل محذوف</p>
 			</div>
 		@endif
-		{{ \\Form::model($".$lower_model_name.", ['route' => ['".$lower_model_name.".update', $".$lower_model_name.'->'.$primary_key."], 'method' => 'put']) }}
+		{{ Form::model($".$lower_model_name.", ['route' => ['".$lower_model_name.".update', $".$lower_model_name.'->'.$primary_key."], 'method' => 'put']) }}
 
 		@include('".$lower_model_name."._form',['btnLabel' => '".config('zlg.button.save', 'save')."','formType' => 'update'])
 
-		{{ \\Form::close() }}
+		{{ Form::close() }}
 
 		@if($".$lower_model_name."->trashed())
-			{{ \\Form::open(['route' => ['".$lower_model_name.".restore', \$".$lower_model_name.'->'.$primary_key."]]) }}
-			{{ \\Form::mtButton('".config('zlg.button.restore', 'restore')."', 'left btn-flat waves-green green-text') }}
-			{{ \\Form::close() }}
+			{{ Form::open(['route' => ['".$lower_model_name.".restore', \$".$lower_model_name.'->'.$primary_key."]]) }}
+			{{ Form::mtButton('".config('zlg.button.restore', 'restore')."', 'left btn-flat waves-green green-text') }}
+			{{ Form::close() }}
 		@else
-			{{ \\Form::open(['route' => ['".$lower_model_name.".destroy', \$".$lower_model_name.'->'.$primary_key."], 'method' => 'delete']) }}
-			{{ \\Form::mtButton('".config('zlg.button.delete', 'delete')."', 'left btn-flat waves-red red-text') }}
-			{{ \\Form::close() }}
+			{{ Form::open(['route' => ['".$lower_model_name.".destroy', \$".$lower_model_name.'->'.$primary_key."], 'method' => 'delete']) }}
+			{{ Form::mtButton('".config('zlg.button.delete', 'delete')."', 'left btn-flat waves-red red-text') }}
+			{{ Form::close() }}
 		@endif
 
     @endif
