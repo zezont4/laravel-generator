@@ -4,7 +4,7 @@
 Route::get('<code>lower_case_model_name</code>/{id}/show')->name('<code>lower_case_model_name</code>.show')->uses('<code>model_name</code>Controller@show')->middleware('acl:admin-<code>lower_case_model_name</code>')->where('id', '[0-9]+');
 
 /* Search */
-Route::get('search/<code>lower_case_model_name</code>')->name('<code>lower_case_model_name</code>.search')->uses('<code>model_name</code>Controller@search',  'middleware' => 'acl:admin-<code>lower_case_model_name</code>');
+Route::get('search/<code>lower_case_model_name</code>')->name('<code>lower_case_model_name</code>.search')->uses('<code>model_name</code>Controller@search')->middleware('acl:admin-<code>lower_case_model_name</code>');
 Route::get('<code>lower_case_model_name</code>s')->name('<code>lower_case_model_name</code>.index')->uses('<code>model_name</code>Controller@index')->middleware('acl:admin-<code>lower_case_model_name</code>');
 
 /* Edit */

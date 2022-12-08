@@ -58,6 +58,7 @@ class LaravelGeneratorServiceProvider extends ServiceProvider
     {
         Form::component('mtText', 'zezont4.components.form.text', ['name', 'label', 'value' => null, 'attributes' => []]);
         Form::component('mtTel', 'zezont4.components.form.tel', ['name', 'label', 'value' => null, 'attributes' => []]);
+        Form::component('mtNumber', 'zezont4.components.form.number', ['name', 'label', 'value' => null, 'attributes' => []]);
         Form::component('mtPassword', 'zezont4.components.form.password', ['name', 'label', 'attributes' => []]);
 
         Form::component('mtDate', 'zezont4.components.form.date', ['name', 'label', 'value' => null, 'attributes' => []]);
