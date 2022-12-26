@@ -68,7 +68,7 @@ class LaravelGeneratorServiceProvider extends ServiceProvider
         Form::component('mtSelect', 'zezont4.components.form.select', ['name', 'label', 'selected_value' => null, 'values', 'attributes' => []]);
         Form::component('mtDefaultSelect', 'zezont4.components.form.default_select', ['name', 'label', 'selected_value' => null, 'values', 'attributes' => []]);
 
-        Form::component('mtButton', 'zezont4.components.form.button', ['label', 'class' => 'waves-light btn']);
+        Form::component('mtButton', 'zezont4.components.form.button', ['label', 'class' => 'waves-light btn','attributes' => []]);
 
         Form::component('mtStatic', 'zezont4.components.form.static', ['label', 'value']);
     }
