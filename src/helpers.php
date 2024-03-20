@@ -95,7 +95,7 @@ if (!\function_exists('casts_array')) {
         foreach (session('fields_array') as $field) {
             if ($field['is_selected']) {
                 $field_type = str_contains(\strtolower($field['data_type']), 'char') ? 'string' : 'integer';
-                $casts_array .= "'".$field['name']."'   =>  '${field_type}',\n\t\t";
+                $casts_array .= "'".$field['name']."'   =>  '{$field_type}',\n\t\t";
             }
         }
 
@@ -137,7 +137,7 @@ if (!\function_exists('generateMaterializeShowPage')) {
         $htmlCode         = "
 @extends('layouts.master')
 
-@section('parent','<a href=\"'.route(\"{$lower_model_name}.index\").'\" class=\"breadcrumb page-title\">${page_title}</a>')
+@section('parent','<a href=\"'.route(\"{$lower_model_name}.index\").'\" class=\"breadcrumb page-title\">{$page_title}</a>')
 @section('title','".config('zlg.title.show', 'show')."')
 
 @section('content')
@@ -152,9 +152,9 @@ if (!\function_exists('generateMaterializeShowPage')) {
             if ($field['is_selected']) {
                 $type = $field['type'];
                 if ($type == 'select' || $type == 'radio' || $type == 'checkbox') {
-                    $htmlCode .= "{{ Form::mtStatic(MyTrans('{$field['name']}'), z_arrayValue(\$my_values['{$field['name']}'],\$${lower_model_name}->{$field['name']})  ) }}\n\t";
+                    $htmlCode .= "{{ Form::mtStatic(MyTrans('{$field['name']}'), z_arrayValue(\$my_values['{$field['name']}'],\${$lower_model_name}->{$field['name']})  ) }}\n\t";
                 } else {
-                    $htmlCode .= "{{ Form::mtStatic(MyTrans('{$field['name']}'), \$${lower_model_name}->{$field['name']}  ) }}\n\t";
+                    $htmlCode .= "{{ Form::mtStatic(MyTrans('{$field['name']}'), \${$lower_model_name}->{$field['name']}  ) }}\n\t";
                 }
             }
         }
@@ -182,17 +182,17 @@ if (!\function_exists('generateMaterializeFormPage')) {
                 $required = $field['is_required'] ? '["is_required"=>true]' : '[]';
 
                 if ($type == 'text') {
-                    $htmlCode .= "{{ Form::mtText('{$field['name']}',MyTrans('{$field['name']}') ,request('{$field['name']}',  null), ${required}) }}\n\n";
+                    $htmlCode .= "{{ Form::mtText('{$field['name']}',MyTrans('{$field['name']}') ,request('{$field['name']}',  null), {$required}) }}\n\n";
                 } elseif ($type == 'date') {
-                    $htmlCode .= "{{ Form::mtDate('{$field['name']}',MyTrans('{$field['name']}') ,request('{$field['name']}',  null),${required}) }}\n\n";
+                    $htmlCode .= "{{ Form::mtDate('{$field['name']}',MyTrans('{$field['name']}') ,request('{$field['name']}',  null),{$required}) }}\n\n";
                 } elseif ($type == 'password') {
-                    $htmlCode .= "{{ Form::mtPassword('{$field['name']}',MyTrans('{$field['name']}',null),${required} ) }}\n\n";
+                    $htmlCode .= "{{ Form::mtPassword('{$field['name']}',MyTrans('{$field['name']}',null),{$required} ) }}\n\n";
                 } elseif ($type == 'select') {
-                    $htmlCode .= "{{ Form::mtSelect('{$field['name']}',MyTrans('{$field['name']}'),request('{$field['name']}',  null),\$my_values['yes_no'],${required} ) }}\n\n";
+                    $htmlCode .= "{{ Form::mtSelect('{$field['name']}',MyTrans('{$field['name']}'),request('{$field['name']}',  null),\$my_values['yes_no'],{$required} ) }}\n\n";
                 } elseif ($type == 'radio') {
-                    $htmlCode .= "{{ Form::mtRadio('{$field['name']}',MyTrans('{$field['name']}'),request('{$field['name']}',  null),\$my_values['yes_no'],${required} ) }}\n\n";
+                    $htmlCode .= "{{ Form::mtRadio('{$field['name']}',MyTrans('{$field['name']}'),request('{$field['name']}',  null),\$my_values['yes_no'],{$required} ) }}\n\n";
                 } elseif ($type == 'checkbox') {
-                    $htmlCode .= "{{ Form::mtCheck('{$field['name']}',MyTrans('{$field['name']}'),request('{$field['name']}',  null),\$my_values['yes_no'],${required} ) }}\n\n";
+                    $htmlCode .= "{{ Form::mtCheck('{$field['name']}',MyTrans('{$field['name']}'),request('{$field['name']}',  null),\$my_values['yes_no'],{$required} ) }}\n\n";
                 }
             }
         }
@@ -213,7 +213,7 @@ if (!\function_exists('generateMaterializeCreatePage')) {
 @extends('layouts.master')
 
 @section('parent')
-    <a href='{{route(\"${lower_model_name}.index\")}}' class='breadcrumb page-title'>${page_title}</a>
+    <a href='{{route(\"{$lower_model_name}.index\")}}' class='breadcrumb page-title'>{$page_title}</a>
 @stop
 @section('title','".config('zlg.title.create', 'create')."')
 
@@ -240,7 +240,7 @@ if (!\function_exists('generateMaterializeEditPage')) {
 @extends('layouts.master')
 
 @section('parent')
-    <a href='{{route(\"${lower_model_name}.index\")}}' class='breadcrumb page-title'>${page_title}</a>
+    <a href='{{route(\"{$lower_model_name}.index\")}}' class='breadcrumb page-title'>{$page_title}</a>
 @stop
 @section('title','".config('zlg.title.edit', 'edit')."')
 
@@ -281,7 +281,7 @@ if (!\function_exists('generateMaterializeIndexPage')) {
         $lower_model_name = \strtolower(snake_case($model_name));
         $htmlCode         = "
 @extends('layouts.master')
-@section('title','${page_title}')
+@section('title','{$page_title}')
 @section('content')
 <div class='row col s12'>
 	<a href='{{route('{$lower_model_name}.create')}}' class='btn waves-effect waves-light blue'>".config('zlg.button.new', 'new')."<i class='material-icons left'>add</i></a>
@@ -296,7 +296,7 @@ if (!\function_exists('generateMaterializeIndexPage')) {
 ";
         foreach (session('fields_array') as $field) {
             if ($field['is_selected']) {
-                $htmlCode .= "\t\t@include('layouts._th',['model'=>'${lower_model_name}','field'=> '{$field['name']}'])\n";
+                $htmlCode .= "\t\t@include('layouts._th',['model'=>'{$lower_model_name}','field'=> '{$field['name']}'])\n";
             }
         }
         $htmlCode .= '
